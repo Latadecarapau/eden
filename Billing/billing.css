@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "poppins", sans-serif;
+}
+
+body {
+  background: #000000;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.reservation-form {
+  background: white;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+fieldset {
+  margin-top: 20px;
+  border: 1px solid #f49e09;
+  padding: 20px;
+}
+
+legend {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+input[type="month"],
+select {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #000000;
+  color: #f49e09;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #39be65;
+  color: #ffffff;
+}
+
+.avoltar {
+  text-decoration: none;
+  color: rgb(82, 54, 35);
+}
+.avoltar:hover {
+  color: #f49e09;
+}
