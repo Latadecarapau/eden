@@ -123,6 +123,20 @@ form .button input {
 form .button input:hover {
   background: #501e1e;
 }
+.phone-container {
+  display: flex;
+  align-items: center;
+}
+
+.phone-container select {
+  margin-right: 10px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.input-boxnum {
+  margin-bottom: 15px;
+}
 @media (max-width: 584px) {
   .container {
     max-width: 100%;

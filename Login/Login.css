@@ -4,16 +4,20 @@
   padding: 0;
   font-family: "poppins", sans-serif;
 }
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(../Home/assets/paisahge.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
 section {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url(../Home/Imagens/darkenhamepage.png);
-  background-position: center;
-  background-size: cover;
+
 }
 .form-box {
   position: relative;
@@ -29,7 +33,7 @@ section {
 }
 h2 {
   font-size: 2em;
-  color: #f49e09;
+  color: #d819b2;
   text-align: center;
 }
 .inputbox {

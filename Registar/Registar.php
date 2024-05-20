@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\Exception;
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "rir";
+$database = "eden";
 $port = 3306;
 
 // Connectar na database
@@ -27,19 +27,19 @@ if ($conn->connect_error) {
 // verificar se o form está submitido e preenchido
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $primeiroNome = $_POST["primeironome"];
-    $apelido = $_POST["apelido"];
+    $firstname = $_POST["firstname"];
+    $lastname = $_POST["lastname"];
     $username = $_POST["username"];
     $email = $_POST["email"];
-    $telefone = $_POST["telefone"];
-    $password = $_POST["password"];
+    $telephone = $_POST["telephone"];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);;
     $confirmPassword = $_POST["confirmPassword"];
-    $genero = $_POST["gender"];
+    $gender = $_POST["gender"];
 
 
     // Insert na database
-    $sql = "INSERT INTO login (primeironome, apelido, Username, email, telefone, Password, genero) 
-            VALUES ('$primeiroNome', '$apelido', '$username', '$email', '$telefone', '$password', '$genero')";
+    $sql = "INSERT INTO users (firstname, lastname, username, email, telephone, password, gender) 
+            VALUES ('$firstname', '$lastname', '$username', '$email', '$telephone', '$password', '$gender')";
 
     if ($conn->query($sql) === TRUE) {
 
@@ -50,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Retrieve form data
-    $primeiroNome = $_POST["primeironome"];
-    $apelido = $_POST["apelido"];
+    $primeiroNome = $_POST["firstname"];
+    $apelido = $_POST["lastname"];
     $email = $_POST["email"];
 
     // Create a new PHPMailer instance
@@ -73,12 +73,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->setFrom('hoteleden2024kgm@gmail.com', 'Hotel Eden');
 
         // Recipient information
-        $mail->addAddress($email, $primeiroNome); // Add a recipient
+        $mail->addAddress($email, $firstname); // Add a recipient
 
         // Email content
         $mail->isHTML(true); // Set email format to HTML
         $mail->Subject = 'Welcome to Our Website';
-        $mail->Body = "Hello $primeiroNome $apelido,<br><br>Thank you for registering on our website. We're glad to have you as a member!<br><br>Best regards,<br>Hotel Eden Team";
+        $mail->Body = "Hello $firstname $lastname,<br><br>Thank you for registering on our website. We're glad to have you as a member!<br><br>Best regards,<br>Hotel Eden Team";
 
         // Send email
         $mail->send();
@@ -101,54 +101,63 @@ $conn->close();
 
 <head>
     <link rel="stylesheet" href="Registar.css" />
-    <title>Registar</title>
+    <title>Register</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="title">Registo</div>
+        <div class="title">Register</div>
         <form form action="Registar.php" method="post">
             <div class="user-details">
                 <div class="input-box">
-                    <span class="details">Primeiro Nome</span>
-                    <input type="text" id="primeironome" name="primeironome" placeholder="Escreva seu Primeiro Nome"
-                        required />
+                    <span class="details">First name</span>
+                    <input type="text" id="firstname" name="firstname" placeholder="Write your first name" required />
                 </div>
                 <div class="input-box">
-                    <span class="details">Apelido</span>
-                    <input type="text" id="apelido" name="apelido" placeholder="Escreva seu Apelido" required />
+                    <span class="details">Last name</span>
+                    <input type="text" id="lastname" name="lastname" placeholder="Write your last name" required />
                 </div>
 
 
                 <div class="input-box">
                     <span class="details">Username</span>
-                    <input type="text" id="username" name="username" placeholder="Escreva seu Username" required />
+                    <input type="text" id="username" name="username" placeholder="Write your Username" required />
                 </div>
 
 
                 <div class="input-box">
                     <span class="details">Email</span>
-                    <input type="text" id="email" name="email" placeholder="Escreva seu Email" required />
+                    <input type="text" id="email" name="email" placeholder="Write your Email" required />
+                </div>
+
+               
+
+                <div class="input-boxnum">
+                    <span class="details">Phone Number</span>
+                    <div class="phone-container">
+                        <select id="countryCode" name="countryCode" required>
+                            <option value="+1">+1 (USA)</option>
+                            <option value="+44">+44 (UK)</option>
+                            <option value="+91">+91 (India)</option>
+                            <option value="+61">+61 (Australia)</option>
+                            <option value="+81">+81 (Japan)</option>
+                            <option value="+351">+351 (Portugal)</option>
+                            <!-- Add more country codes as needed -->
+                        </select>
+                        <input type="text" id="telephone" name="telephone" placeholder="Write your phone number" required />
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Password</span>
+                    <input type="text" id="password" name="password" placeholder="Write your password" required />
                 </div>
 
 
                 <div class="input-box">
-                    <span class="details">Número de telefone</span>
-                    <input type="text" id="telefone" name="telefone" placeholder="Escreva seu Número de telefone"
+                    <span class="details">Confirm Password</span>
+                    <input type="text" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"
                         required />
-                </div>
-
-
-                <div class="input-box">
-                    <span class="details">Palavra-passe</span>
-                    <input type="text" id="password" name="password" placeholder="Escreva sua Palavra-passe" required />
-                </div>
-
-
-                <div class="input-box">
-                    <span class="details">Confirme Palavra-passe</span>
-                    <input type="text" id="confirmPassword" name="confirmPassword"
-                        placeholder="Confirme a sua Palavra-passe" required />
                 </div>
             </div>
 
@@ -158,24 +167,24 @@ $conn->close();
                 <input type="radio" name="gender" id="dot-1">
                 <input type="radio" name="gender" id="dot-2">
                 <input type="radio" name="gender" id="dot-3">
-                <span class="gender-title">Género</span>
+                <span class="gender-title">Gender</span>
                 <div class="category">
                     <label for="dot-1">
                         <span class="dot one"></span>
-                        <span class="gender">Masculino</span>
+                        <span class="gender">Male</span>
                     </label>
                     <label for="dot-2">
                         <span class="dot two"></span>
-                        <span class="gender">Feminino</span>
+                        <span class="gender">Female</span>
                     </label>
                     <label for="dot-3">
                         <span class="dot three"></span>
-                        <span class="gender">Outros</span>
+                        <span class="gender">Other</span>
                     </label>
                 </div>
             </div>
             <div class="button">
-                <a href="../Login/Login.php" class="a">Voltar</a><input type="submit" value="Register" />
+                <a href="../Login/Login.php" class="a">back</a><input type="submit" value="Register" />
             </div>
         </form>
     </div>
