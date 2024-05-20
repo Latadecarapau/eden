@@ -21,7 +21,7 @@ $loggedIn = isset($_SESSION['username']);
     <nav>
       <div class="nav__bar">
         <div class="logo">
-          <img src="assets/Eden.png" alt="logo" />
+          <img src="assetshome/logo.png" alt="logo" />
         </div>
         <div class="nav__menu__btn" id="menu-btn">
           <i class="ri-menu-line"></i>
@@ -99,7 +99,7 @@ $loggedIn = isset($_SESSION['username']);
 
   <section class="section__container about__container" id="about">
     <div class="about__image">
-      <img src="assets/about.jpg" alt="about" />
+      <img src="assetshome/about.jpg" alt="about" />
     </div>
     <div class="about__content">
       <p class="section__subheader">ABOUT US</p>
@@ -122,7 +122,7 @@ $loggedIn = isset($_SESSION['username']);
     <div class="room__grid">
       <div class="room__card">
         <div class="room__card__image">
-          <img src="assets/room-1.jpg" alt="room" />
+          <img src="assetshome/room-1.jpg" alt="room" />
           <div class="room__card__icons">
             <span><i class="ri-heart-fill"></i></span>
             <span><i class="ri-paint-fill"></i></span>
@@ -141,7 +141,7 @@ $loggedIn = isset($_SESSION['username']);
       </div>
       <div class="room__card">
         <div class="room__card__image">
-          <img src="assets/room-2.jpg" alt="room" />
+          <img src="assetshome/room-2.jpg" alt="room" />
           <div class="room__card__icons">
             <span><i class="ri-heart-fill"></i></span>
             <span><i class="ri-paint-fill"></i></span>
@@ -160,7 +160,7 @@ $loggedIn = isset($_SESSION['username']);
       </div>
       <div class="room__card">
         <div class="room__card__image">
-          <img src="assets/room-3.jpg" alt="room" />
+          <img src="assetshome/room-3.jpg" alt="room" />
           <div class="room__card__icons">
             <span><i class="ri-heart-fill"></i></span>
             <span><i class="ri-paint-fill"></i></span>
@@ -240,7 +240,7 @@ $loggedIn = isset($_SESSION['username']);
     <div class="section__container footer__container">
       <div class="footer__col">
         <div class="logo">
-          <a href="#home"><img src="assets/logo.png" alt="logo" /></a>
+          <a href="#home"><img src="assetshome/logo.png" alt="logo" /></a>
         </div>
         <p class="section__description">
           Discover a world of comfort, luxury, and adventure as you explore
@@ -274,10 +274,10 @@ $loggedIn = isset($_SESSION['username']);
           <li><a href="#">hoteleden2024kgm@gmail.com</a></li>
         </ul>
         <div class="footer__socials">
-          <a href="#"><img src="assets/facebook.png" alt="facebook" /></a>
-          <a href="#"><img src="assets/instagram.png" alt="instagram" /></a>
-          <a href="#"><img src="assets/youtube.png" alt="youtube" /></a>
-          <a href="#"><img src="assets/twitter.png" alt="twitter" /></a>
+          <a href="#"><img src="assetshome/facebook.png" alt="facebook" /></a>
+          <a href="#"><img src="assetshome/instagram.png" alt="instagram" /></a>
+          <a href="#"><img src="assetshome/youtube.png" alt="youtube" /></a>
+          <a href="#"><img src="assetshome/twitter.png" alt="twitter" /></a>
         </div>
       </div>
     </div>

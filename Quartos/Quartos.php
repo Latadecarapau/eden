@@ -72,7 +72,7 @@ $loggedIn = isset($_SESSION['username']);
     <div class="room__grid">
       <div class="room__card">
         <div class="room__card__image">
-          <img src="assets/room-1.jpg" alt="room" />
+          <img src="assetsrooms/room-1.jpg" alt="room" />
           <div class="room__card__icons">
             <span><i class="ri-heart-fill"></i></span>
             <span><i class="ri-paint-fill"></i></span>
@@ -91,7 +91,7 @@ $loggedIn = isset($_SESSION['username']);
       </div>
       <div class="room__card">
         <div class="room__card__image">
-          <img src="assets/room-2.jpg" alt="room" />
+          <img src="assetsrooms/room-2.jpg" alt="room" />
           <div class="room__card__icons">
             <span><i class="ri-heart-fill"></i></span>
             <span><i class="ri-paint-fill"></i></span>
@@ -110,7 +110,7 @@ $loggedIn = isset($_SESSION['username']);
       </div>
       <div class="room__card">
         <div class="room__card__image">
-          <img src="assets/room-3.jpg" alt="room" />
+          <img src="assetsrooms/room-3.jpg" alt="room" />
           <div class="room__card__icons">
             <span><i class="ri-heart-fill"></i></span>
             <span><i class="ri-paint-fill"></i></span>
@@ -139,7 +139,7 @@ $loggedIn = isset($_SESSION['username']);
     <div class="section__container footer__container">
       <div class="footer__col">
         <div class="logo">
-          <a href="#home"><img src="assets/logo.png" alt="logo" /></a>
+          <a href="#home"><img src="assetsrooms/logo.png" alt="logo" /></a>
         </div>
         <p class="section__description">
           Discover a world of comfort, luxury, and adventure as you explore
@@ -173,10 +173,10 @@ $loggedIn = isset($_SESSION['username']);
           <li><a href="#">hoteleden2024kgm@gmail.com</a></li>
         </ul>
         <div class="footer__socials">
-          <a href="#"><img src="assets/facebook.png" alt="facebook" /></a>
-          <a href="#"><img src="assets/instagram.png" alt="instagram" /></a>
-          <a href="#"><img src="assets/youtube.png" alt="youtube" /></a>
-          <a href="#"><img src="assets/twitter.png" alt="twitter" /></a>
+          <a href="#"><img src="assetsrooms/facebook.png" alt="facebook" /></a>
+          <a href="#"><img src="assetsrooms/instagram.png" alt="instagram" /></a>
+          <a href="#"><img src="assetsrooms/youtube.png" alt="youtube" /></a>
+          <a href="#"><img src="assetsrooms/twitter.png" alt="twitter" /></a>
         </div>
       </div>
     </div>
