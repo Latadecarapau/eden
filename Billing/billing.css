@@ -21,7 +21,7 @@ body {
 
 fieldset {
   margin-top: 20px;
-  border: 1px solid #f49e09;
+  border: 1px solid #e721c6;
   padding: 20px;
 }
 
@@ -50,7 +50,7 @@ select {
 
 button {
   background-color: #000000;
-  color: #f49e09;
+  color: #e721c6;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
@@ -67,5 +67,5 @@ button:hover {
   color: rgb(82, 54, 35);
 }
 .avoltar:hover {
-  color: #f49e09;
+  color: #e721c6;
 }

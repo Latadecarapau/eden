@@ -69,7 +69,6 @@
   box-sizing: border-box;
 }
 
-
 .section__container {
   max-width: var(--max-width);
   margin: auto;
@@ -201,7 +200,6 @@ nav {
 }
 
 .nav__links a {
-  
   position: relative;
   isolation: isolate;
   padding-bottom: 8px;
@@ -213,9 +211,7 @@ nav {
   display: none;
 }
 
-
-
-.room__card a{
+.room__card a {
   text-decoration: none;
   color: #fff;
 }
@@ -228,7 +224,6 @@ nav {
 .room__card {
   overflow: hidden;
   background-color: var(--white);
-  
 }
 
 .room__card__image {
@@ -248,7 +243,6 @@ nav {
   gap: 1rem;
   z-index: 1;
 }
-
 
 .room__card__icons span {
   display: inline-block;
@@ -274,7 +268,6 @@ nav {
 
 .room__card__details {
   padding: 1rem;
- 
 }
 
 .room__card h4 {
@@ -301,10 +294,6 @@ nav {
   color: var(--text-dark);
 }
 
-
-
-
-
 .banner__content {
   padding: 2rem;
   display: flex;
@@ -330,7 +319,6 @@ nav {
 .banner__card p {
   color: var(--text-light);
 }
-
 
 .footer {
   background-color: var(--text-dark);
@@ -473,41 +461,3 @@ nav {
   }
 }
 
-.search-bar {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.search-bar input {
-  width: 500px;
-  padding: 15px;
-  border: 2px solid #ddd;
-  border-radius: 25px;
-  font-size: 18px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search-bar input:focus {
-  outline: none;
-  border-color: #ff4081;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.search-bar .search-btn {
-  padding: 15px 25px;
-  margin-left: 10px;
-  border: none;
-  background-color: #ff4081;
-  color: #fff;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search-bar .search-btn:hover {
-  background-color: #ff1c66;
-}

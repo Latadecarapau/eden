@@ -2,7 +2,7 @@
 // Login.php
 session_start();
 
-// Connect to the database
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -14,12 +14,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Fetch the user from the database
+    
     $sql = "SELECT * FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
@@ -33,7 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) {
             // Password is correct, start a session
             $_SESSION['username'] = $user['username'];
-            header("Location: ../Home/Home.php"); // Redirect to a welcome page
+
+            $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : '../Home/Home.php';
+            header("Location:". $redirect); // Redirect to the specified page
             exit();
         } else {
             echo "Invalid password";
@@ -62,7 +64,7 @@ $conn->close();
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form action="Login.php" method="post">
+                <form action="Login.php <?php echo isset($_GET['redirect']) ? '?redirect=' . urlencode($_GET['redirect']) : ''; ?>" method="post">
                     <h2>Login</h2>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>

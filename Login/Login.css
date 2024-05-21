@@ -6,7 +6,7 @@
 }
 body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url(../Home/assets/paisahge.jpg);
+    url(../Home/assetshome/paisahge.jpg);
   background-position: center;
   background-size: cover;
 }

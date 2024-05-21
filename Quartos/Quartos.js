@@ -68,3 +68,4 @@ ScrollReveal().reveal(".service__list li", {
   interval: 500,
   origin: "right",
 });
+

@@ -1,6 +1,7 @@
 <?php
 session_start();
 $loggedIn = isset($_SESSION['username']);
+
 ?>
 
 <html lang="en">
@@ -18,7 +19,7 @@ $loggedIn = isset($_SESSION['username']);
     <nav>
       <div class="nav__bar">
         <div class="logo">
-          <a href="#"><img src="assets/logo.png" alt="logo" /></a>
+          <a href="#"><img src="assetsrooms/logo.png" alt="logo" /></a>
         </div>
         <div class="nav__menu__btn" id="menu-btn">
           <i class="ri-menu-line"></i>
@@ -66,7 +67,7 @@ $loggedIn = isset($_SESSION['username']);
     <!-- Search Bar -->
     <div class="search__bar">
       <input type="text" id="search-input" placeholder="Search rooms..." id="search-input" />
-      <button class="btn" id="search-btn">Search</button>
+      <button class="btn " id="search-btn">Search</button>
     </div>
 
     <div class="room__grid">
@@ -86,7 +87,7 @@ $loggedIn = isset($_SESSION['username']);
             suite.
           </p>
           <h5>Starting from <span>$299/night</span></h5>
-          <a href="../Billing/Billing.php"><button class="btn">Book Now</button></a>
+          <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
         </div>
       </div>
       <div class="room__card">
@@ -105,7 +106,7 @@ $loggedIn = isset($_SESSION['username']);
             city.
           </p>
           <h5>Starting from <span>$199/night</span></h5>
-          <a href="../Billing/Billing.php"><button class="btn">Book Now</button></a>
+          <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
         </div>
       </div>
       <div class="room__card">
@@ -124,7 +125,7 @@ $loggedIn = isset($_SESSION['username']);
             with loved ones.
           </p>
           <h5>Starting from <span>$249/night</span></h5>
-          <a href="../Billing/Billing.php"><button class="btn">Book Now</button></a>
+          <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
         </div>
       </div>
     </div>
@@ -146,7 +147,7 @@ $loggedIn = isset($_SESSION['username']);
           our curated selection of hotels, making every moment of your getaway
           truly extraordinary.
         </p>
-        <button class="btn">Book Now</button>
+        <button class="btn" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
       </div>
       <div class="footer__col">
         <h4>QUICK LINKS</h4>
@@ -188,6 +189,8 @@ $loggedIn = isset($_SESSION['username']);
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="Quartos.js"></script>
   <script src="searchbar.js"></script>
+  <script src="Redirect.js"></script>
+  
 </body>
 
 </html>

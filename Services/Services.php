@@ -13,7 +13,9 @@ $loggedIn = isset($_SESSION['username']);
     <title>Rooms</title>
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-
+    <!-- Vendor Script -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- Fonts css load -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,10 +78,16 @@ $loggedIn = isset($_SESSION['username']);
             <button class="btn nav__btn">Book Now</button>
         </nav>
     </header>
-    <section>
+
+    <section class="body">
         
-             
+       
     </section>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js'></script>
+    <script src="Services.js"></script>
+
 
 
 
