@@ -6,7 +6,10 @@
 }
 
 body {
-  background: #000000;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(../Home/assetshome/paisahge.jpg);
+  background-position: center;
+  background-size: cover;
   padding: 20px;
   line-height: 1.6;
 }
@@ -58,7 +61,7 @@ button {
 }
 
 button:hover {
-  background-color: #39be65;
+  background-color: #222422;
   color: #ffffff;
 }
 
@@ -68,4 +71,10 @@ button:hover {
 }
 .avoltar:hover {
   color: #e721c6;
+}
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+  display: block;
 }

@@ -12,7 +12,10 @@ body {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-color: black;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(../Home/assetshome/paisahge.jpg);
+  background-position: center;
+  background-size: cover;
 }
 .a {
   text-decoration: none;
@@ -123,7 +126,7 @@ form .button input {
 form .button input:hover {
   background: #501e1e;
 }
-.phone-container {
+/* .phone-container {
   display: flex;
   align-items: center;
 }
@@ -132,10 +135,19 @@ form .button input:hover {
   margin-right: 10px;
   padding: 10px;
   font-size: 14px;
-}
+} */
 
 .input-boxnum {
   margin-bottom: 15px;
+}
+.error {
+  color: red;
+}
+.phone-container {
+  display: flex;
+}
+.phone-container input {
+  flex: 1;
 }
 @media (max-width: 584px) {
   .container {

@@ -68,4 +68,15 @@ ScrollReveal().reveal(".service__list li", {
   interval: 500,
   origin: "right",
 });
+let currentSlide = 0;
+
+function moveSlide(step, slidesClass) {
+  const slides = document.querySelectorAll(`.${slidesClass} .slide`);
+  let currentSlideIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+  slides[currentSlideIndex].classList.remove('active');
+  currentSlideIndex = (currentSlideIndex + step + slides.length) % slides.length;
+  slides[currentSlideIndex].classList.add('active');
+}
+
+
 

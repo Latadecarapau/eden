@@ -1,6 +1,17 @@
 <?php
 session_start();
 $loggedIn = isset($_SESSION['username']);
+
+require '../db.php';
+
+$sql_reservations = "SELECT COUNT(*) as total_reservations FROM reservations";
+$result_reservations = $conn->query($sql_reservations);
+$total_reservations = $result_reservations->fetch_assoc()['total_reservations'];
+
+$sql_rooms = "SELECT COUNT(*) as total_rooms FROM exhibit_rooms WHERE is_available = 1";
+$result_rooms = $conn->query($sql_rooms);
+$total_rooms = $result_rooms->fetch_assoc()['total_rooms'];
+
 ?>
 
 <html lang="en">
@@ -29,11 +40,11 @@ $loggedIn = isset($_SESSION['username']);
       </div>
       <ul class="nav__links" id="nav-links">
         <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="../Services/Services.php">Services</a></li>
-        <li><a href="../Quartos/Quartos.php">Rooms</a></li>
-        <li><a href="#explore">Explore</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="../AboutUs/About.php">Sobre Nós</a></li>
+        <li><a href="../Services/Services.php">Pacotes</a></li>
+        <li><a href="../Quartos/Quartos.php">Quartos</a></li>
+        <li><a href="#explore">Cozinha</a></li>
+        <li><a href="#contact">Contactos</a></li>
 
 
         <?php if ($loggedIn): ?>
@@ -45,7 +56,7 @@ $loggedIn = isset($_SESSION['username']);
                   <span><?php echo $_SESSION['username']; ?></span>
                 </button>
                 <div class="dropdown-content">
-                  <a href="#">Profile</a>
+                  <a href="../Profile/Profile.php">Profile</a>
                   <a href="#">Settings</a>
                   <a href="../Logout/logout.php">Logout</a>
                 </div>
@@ -61,8 +72,8 @@ $loggedIn = isset($_SESSION['username']);
       <button class="btn nav__btn">Book Now</button>
     </nav>
     <div class="section__container header__container" id="home">
-      <p>Simple - Unique - Friendly</p>
-      <h1>Make Yourself At Home<br />In Our <span>Hotel</span>.</h1>
+      <p>Simples - Unico - Amigável</p>
+      <h1>Sinta-se em casa<br />No Nosso <span>Hotel Eden</span>.</h1>
     </div>
     </ul>
 
@@ -74,25 +85,25 @@ $loggedIn = isset($_SESSION['username']);
         <span><i class="ri-calendar-2-fill"></i></span>
         <div>
           <label for="check-in">CHECK-IN</label>
-          <input type="text" placeholder="Check In" />
+          <input type="text" placeholder="Digite Aqui" />
         </div>
       </div>
       <div class="input__group">
         <span><i class="ri-calendar-2-fill"></i></span>
         <div>
           <label for="check-out">CHECK-OUT</label>
-          <input type="text" placeholder="Check Out" />
+          <input type="text" placeholder="Digite Aqui" />
         </div>
       </div>
       <div class="input__group">
         <span><i class="ri-user-fill"></i></span>
         <div>
-          <label for="guest">GUEST</label>
-          <input type="text" placeholder="Guest" />
+          <label for="check-out">Hospedes</label>
+          <input type="text" placeholder="Digite Aqui" />
         </div>
       </div>
       <div class="input__group input__btn">
-        <button class="btn">CHECH OUT</button>
+        <button class="btn">CHECK OUT</button>
       </div>
     </form>
   </section>
@@ -102,23 +113,21 @@ $loggedIn = isset($_SESSION['username']);
       <img src="assetshome/about.jpg" alt="about" />
     </div>
     <div class="about__content">
-      <p class="section__subheader">ABOUT US</p>
-      <h2 class="section__header">The Best Holidays Start Here!</h2>
+      <p class="section__subheader">SOBRE NÓS</p>
+      <h2 class="section__header">As suas melhores férias começam aqui!</h2>
       <p class="section__description">
-        With a focus on quality accommodations, personalized experiences, and
-        seamless booking, our platform is dedicated to ensuring that every
-        traveler embarks on their dream holiday with confidence and
-        excitement.
+        Com foco em acomodações de qualidade, experiências personalizadas e reserva fácil, a nossa plataforma está
+        dedicada a garantir que cada viajante inicie as suas férias de sonho com confiança e entusiasmo.
       </p>
       <div class="about__btn">
-        <button class="btn">Read More</button>
+        <button class="btn">Veja Mais</button>
       </div>
     </div>
   </section>
 
   <section class="section__container room__container">
-    <p class="section__subheader">OUR LIVING ROOM</p>
-    <h2 class="section__header">The Most Memorable Rest Time Starts Here.</h2>
+    <p class="section__subheader">Os Nossos Quartos destacados </p>
+    <h2 class="section__header">Quartos de mais refinada qualidade.</h2>
     <div class="room__grid">
       <div class="room__card">
         <div class="room__card__image">
@@ -136,7 +145,7 @@ $loggedIn = isset($_SESSION['username']);
             suite.
           </p>
           <h5>Starting from <span>$299/night</span></h5>
-          <button class="btn">Book Now</button>
+          <a href="../Quartos/Quartos.php"><button class="btn">Veja Mais</button></a>
         </div>
       </div>
       <div class="room__card">
@@ -155,7 +164,7 @@ $loggedIn = isset($_SESSION['username']);
             city.
           </p>
           <h5>Starting from <span>$199/night</span></h5>
-          <button class="btn">Book Now</button>
+          <a href="../Quartos/Quartos.php"><button class="btn">Veja Mais</button></a>
         </div>
       </div>
       <div class="room__card">
@@ -174,7 +183,7 @@ $loggedIn = isset($_SESSION['username']);
             with loved ones.
           </p>
           <h5>Starting from <span>$249/night</span></h5>
-          <button class="btn">Book Now</button>
+          <a href="../Quartos/Quartos.php"><button class="btn">Veja Mais</button></a>
         </div>
       </div>
     </div>
@@ -183,24 +192,28 @@ $loggedIn = isset($_SESSION['username']);
   <section class="service" id="service">
     <div class="section__container service__container">
       <div class="service__content">
-        <p class="section__subheader">SERVICES</p>
-        <h2 class="section__header">Strive Only For The Best.</h2>
+        <p class="section__subheader">Pacotes</p>
+        <h2 class="section__header">Pacotes do preços irresistiveis.</h2>
         <ul class="service__list">
           <li>
             <span><i class="ri-shield-star-line"></i></span>
-            High Class Security
+            Serviço topo de gama
           </li>
           <li>
             <span><i class="ri-24-hours-line"></i></span>
-            24 Hours Room Service
+            24 horas de serviço ao quarto
           </li>
           <li>
             <span><i class="ri-headphone-line"></i></span>
-            Conference Room
+            Spa
           </li>
           <li>
             <span><i class="ri-map-2-line"></i></span>
-            Tourist Guide Support
+            Guia turisticos
+          </li>
+          <li>
+            <span><i class="ri-map-2-line"></i></span>
+            Atividades outdoors
           </li>
         </ul>
       </div>
@@ -210,28 +223,29 @@ $loggedIn = isset($_SESSION['username']);
   <section class="section__container banner__container">
     <div class="banner__content">
       <div class="banner__card">
-        <h4>25+</h4>
-        <p>Properties Available</p>
+        <h4><?php echo $total_rooms; ?>+</h4>
+        <p>Quartos disponiveis</p>
       </div>
       <div class="banner__card">
-        <h4>350+</h4>
-        <p>Bookings Completed</p>
+        <h4><?php echo $total_reservations; ?>+</h4>
+        <p>Reservas Feitas</p>
       </div>
       <div class="banner__card">
         <h4>600+</h4>
-        <p>Happy Customers</p>
+        <p>Clientes Satisfeitos</p>
       </div>
     </div>
   </section>
 
+
   <section class="explore" id="explore">
     <p class="section__subheader">EXPLORE</p>
-    <h2 class="section__header">What's New Today.</h2>
+    <h2 class="section__header">Melhor cozinhados da Margem.</h2>
     <div class="explore__bg">
       <div class="explore__content">
-        <p class="section__description">10th MAR 2023</p>
-        <h4>A New Menu Is Available In Our Hotel.</h4>
-        <button class="btn">Continue</button>
+        <p class="section__description" id="current-date-time"></p>
+        <h4>Novo menu todos os dias no Eden Hotel.</h4>
+        <a href="../Cozinha/Cozinha.php"><button class="btn">Ver Menus</button></a>
       </div>
     </div>
   </section>
@@ -247,7 +261,7 @@ $loggedIn = isset($_SESSION['username']);
           our curated selection of hotels, making every moment of your getaway
           truly extraordinary.
         </p>
-        <button class="btn">Book Now</button>
+        <a href="../Contactos/ContactForm.php"><button class="btn">CONTACT-NOS</button></a>
       </div>
       <div class="footer__col">
         <h4>QUICK LINKS</h4>
@@ -269,7 +283,7 @@ $loggedIn = isset($_SESSION['username']);
         </ul>
       </div>
       <div class="footer__col">
-        <h4>CONTACT US</h4>
+        <h4>NOSSO EMAIL</h4>
         <ul class="footer__links">
           <li><a href="#">hoteleden2024kgm@gmail.com</a></li>
         </ul>
@@ -285,6 +299,27 @@ $loggedIn = isset($_SESSION['username']);
       Copyright © 2024 Latadecarapau. All rights reserved.
     </div>
   </footer>
+  <script>
+    function updateDateTime() {
+      const dateTimeElement = document.getElementById('current-date-time');
+      const currentDateTime = new Date();
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      };
+      dateTimeElement.textContent = currentDateTime.toLocaleDateString('PT-PT', options);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+    });
+  </script>
 
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="Home.js"></script>

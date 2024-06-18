@@ -10,8 +10,9 @@ $loggedIn = isset($_SESSION['username']);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="Quartos.css" />
   <title>Rooms</title>
+
 </head>
 
 <body>
@@ -27,11 +28,10 @@ $loggedIn = isset($_SESSION['username']);
       </div>
       <ul class="nav__links" id="nav-links">
         <li><a href="../Home/Home.php">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="../Services/Services.php">Services</a></li>
-        <li><a href="../Quartos/Quartos.php">Rooms</a></li>
-        <li><a href="#explore">Explore</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="../AboutUs/About.php">Sobre Nós</a></li>
+        <li><a href="../Services/Services.php">Pacotes</a></li>
+        <li><a href="../Home/Home.php">Explore</a></li>
+        <li><a href="../Contactos/ContactForm.php">Contact-nos</a></li>
 
 
         <?php if ($loggedIn): ?>
@@ -43,7 +43,7 @@ $loggedIn = isset($_SESSION['username']);
                   <span><?php echo $_SESSION['username']; ?></span>
                 </button>
                 <div class="dropdown-content">
-                  <a href="#">Profile</a>
+                  <a href="../Profile/Profile.php">Profile</a>
                   <a href="#">Settings</a>
                   <a href="../Logout/logout.php">Logout</a>
                 </div>
@@ -61,19 +61,27 @@ $loggedIn = isset($_SESSION['username']);
 
 
   <section class="section__container room__container">
-    <p class="section__subheader">Room´s for all</p>
-    <h2 class="section__header">Make your reservation now .</h2>
+    <p class="section__subheader">Quartos para todos</p>
+    <h2 class="section__header">Faça a sua reserva agora .</h2>
 
     <!-- Search Bar -->
-    <div class="search__bar">
-      <input type="text" id="search-input" placeholder="Search rooms..." id="search-input" />
-      <button class="btn " id="search-btn">Search</button>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Pesquisar Quartos..." id="search-input" />
+      <button class="btn " id="search-btn">Pesquisar</button>
     </div>
 
     <div class="room__grid">
       <div class="room__card">
         <div class="room__card__image">
-          <img src="assetsrooms/room-1.jpg" alt="room" />
+          <div class="slider slider-1">
+            <div class="slides slides-1">
+              <img src="assetsrooms/room-1.jpg" alt="room" class="slide active" />
+              <img src="assetsrooms/room-2.jpg" alt="room" class="slide" />
+              <img src="assetsrooms/room-3.jpg" alt="room" class="slide" />
+            </div>
+            <button class="prev" onclick="moveSlide(-1, 'slides-1')">&#10094;</button>
+            <button class="next" onclick="moveSlide(1, 'slides-1')">&#10095;</button>
+          </div>
           <div class="room__card__icons">
             <span><i class="ri-heart-fill"></i></span>
             <span><i class="ri-paint-fill"></i></span>
@@ -82,17 +90,25 @@ $loggedIn = isset($_SESSION['username']);
         </div>
         <div class="room__card__details">
           <h4>Deluxe Ocean View</h4>
-          <p>
-            Bask in luxury with breathtaking ocean views from your private
-            suite.
-          </p>
+          <p>Bask in luxury with breathtaking ocean views from your private suite.</p>
           <h5>Starting from <span>$299/night</span></h5>
-          <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
+          
+            <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
+         
         </div>
       </div>
+
       <div class="room__card">
         <div class="room__card__image">
-          <img src="assetsrooms/room-2.jpg" alt="room" />
+          <div class="slider slider-2">
+            <div class="slides slides-2">
+              <img src="assetsrooms/room-4.jpg" alt="room" class="slide active" />
+              <img src="assetsrooms/room-5.jpg" alt="room" class="slide" />
+              <img src="assetsrooms/room-6.jpg" alt="room" class="slide" />
+            </div>
+            <button class="prev" onclick="moveSlide(-1, 'slides-2')">&#10094;</button>
+            <button class="next" onclick="moveSlide(1, 'slides-2')">&#10095;</button>
+          </div>
           <div class="room__card__icons">
             <span><i class="ri-heart-fill"></i></span>
             <span><i class="ri-paint-fill"></i></span>
@@ -101,17 +117,25 @@ $loggedIn = isset($_SESSION['username']);
         </div>
         <div class="room__card__details">
           <h4>Executive Cityscape Room</h4>
-          <p>
-            Experience urban elegance and modern comfort in the heart of the
-            city.
-          </p>
+          <p>Experience urban elegance and modern comfort in the heart of the city.</p>
           <h5>Starting from <span>$199/night</span></h5>
-          <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
+          
+            <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
+         
         </div>
       </div>
+
       <div class="room__card">
         <div class="room__card__image">
-          <img src="assetsrooms/room-3.jpg" alt="room" />
+          <div class="slider slider-3">
+            <div class="slides slides-3">
+              <img src="assetsrooms/room-7.jpg" alt="room" class="slide active" />
+              <img src="assetsrooms/room-8.jpg" alt="room" class="slide" />
+              <img src="assetsrooms/room-9.jpg" alt="room" class="slide" />
+            </div>
+            <button class="prev" onclick="moveSlide(-1, 'slides-3')">&#10094;</button>
+            <button class="next" onclick="moveSlide(1, 'slides-3')">&#10095;</button>
+          </div>
           <div class="room__card__icons">
             <span><i class="ri-heart-fill"></i></span>
             <span><i class="ri-paint-fill"></i></span>
@@ -120,12 +144,11 @@ $loggedIn = isset($_SESSION['username']);
         </div>
         <div class="room__card__details">
           <h4>Family Garden Retreat</h4>
-          <p>
-            Spacious and inviting, perfect for creating cherished memories
-            with loved ones.
-          </p>
+          <p>Spacious and inviting, perfect for creating cherished memories with loved ones.</p>
           <h5>Starting from <span>$249/night</span></h5>
+          
           <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
+          
         </div>
       </div>
     </div>
@@ -190,7 +213,7 @@ $loggedIn = isset($_SESSION['username']);
   <script src="Quartos.js"></script>
   <script src="searchbar.js"></script>
   <script src="Redirect.js"></script>
-  
+
 </body>
 
 </html>

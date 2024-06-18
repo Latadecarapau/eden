@@ -5,14 +5,17 @@
   font-family: "poppins", sans-serif;
 }
 body {
-  background-color: black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(../Home/assetshome/paisahge.jpg);
+  background-position: center;
+  background-size: cover;
 }
 a {
   text-decoration: none;
   color: #ccc;
 }
 a:hover {
-  color: #f49e09;
+  color: #d819b2;
 }
 
 .contact-form {
@@ -21,10 +24,16 @@ a:hover {
   padding: 20px;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 8px #aaa;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+ 
+  
 }
 
 .contact-form h2 {
-  color: #f49e09;
+  color: #d819b2;
   text-align: center;
 }
 
@@ -33,7 +42,7 @@ a:hover {
 }
 
 .form-group label {
-  color: #f49e09;
+  color: #fff;
   display: block;
   margin-bottom: 5px;
 }
@@ -53,12 +62,12 @@ a:hover {
 button {
   width: 100%;
   padding: 10px;
-  background-color: #f49e09;
+  background-color: #d819b2;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #970a68;
 }

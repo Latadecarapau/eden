@@ -10,7 +10,7 @@ $loggedIn = isset($_SESSION['username']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="Services.css" />
-    <title>Rooms</title>
+    <title>services</title>
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <!-- Vendor Script -->
@@ -47,12 +47,10 @@ $loggedIn = isset($_SESSION['username']);
             </div>
             <ul class="nav__links" id="nav-links">
                 <li><a href="../Home/Home.php">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#service">Services</a></li>
-                <li><a href="../Quartos/Quartos.php">Rooms</a></li>
-                <li><a href="#explore">Explore</a></li>
-                <li><a href="#contact">Contact</a></li>
-
+                <li><a href="../AboutUs/About.php">Sobre Nós</a></li>
+                <li><a href="../Quartos/Quartos.php">Quartos</a></li>
+                <li><a href="../Home/explore">Explore</a></li>
+                <li><a href="../Contactos/ContactForm.php">Contact-nos</a></li>
 
                 <?php if ($loggedIn): ?>
                     <li>
@@ -78,19 +76,87 @@ $loggedIn = isset($_SESSION['username']);
             <button class="btn nav__btn">Book Now</button>
         </nav>
     </header>
+    <section class="section__container service__container">
+        <p class="section__subheader">Pacotes para todos </p>
+        <h2 class="section__header">Compre seu pacote agora .</h2>
 
-    <section class="body">
-        
-       
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Pesquise Pacotes..." id="search-input" />
+            <button class="btn " id="search-btn">Procurar</button>
+        </div>
+
+        <div class="service__grid">
+            <div class="service__card">
+                <div class="service__card__image">
+                    <img src="assetsservice/service-1.jpg" alt="service" />
+                    <div class="service__card__icons">
+                        <span><i class="ri-heart-fill"></i></span>
+                        <span><i class="ri-paint-fill"></i></span>
+                        <span><i class="ri-shield-star-line"></i></span>
+                    </div>
+                </div>
+                <div class="service__card__details">
+                    <h4>Pacote tour</h4>
+                    <p>
+                        Bask in luxury with breathtaking ocean views from your private suite.
+                    </p>
+                    <h5>Starting from <span>$299/night</span></h5>
+                    <a href="../Billing/Billing.php"> <button class="btn book-now"
+                            data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button></a>
+                </div>
+            </div>
+            <div class="service__card">
+                <div class="service__card__image">
+                    <img src="assetsservices/service-2.jpg" alt="service" />
+                    <div class="service__card__icons">
+                        <span><i class="ri-heart-fill"></i></span>
+                        <span><i class="ri-paint-fill"></i></span>
+                        <span><i class="ri-shield-star-line"></i></span>
+                    </div>
+                </div>
+                <div class="service__card__details">
+                    <h4>Executive Cityscape service</h4>
+                    <p>
+                        Experience urban elegance and modern comfort in the heart of the city.
+                    </p>
+                    <h5>Starting from <span>$199/night</span></h5>
+                    <a href="../Billing/Billing.php"> <button class="btn book-now"
+                            data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button></a>
+                </div>
+            </div>
+            <div class="service__card">
+                <div class="service__card__image">
+                    <img src="assetsservices/service-3.jpg" alt="service" />
+                    <div class="service__card__icons">
+                        <span><i class="ri-heart-fill"></i></span>
+                        <span><i class="ri-paint-fill"></i></span>
+                        <span><i class="ri-shield-star-line"></i></span>
+                    </div>
+                </div>
+                <div class="service__card__details">
+                    <h4>Family Garden Retreat</h4>
+                    <p>
+                        Spacious and inviting, perfect for creating cherished memories
+                        with loved ones.
+                    </p>
+                    <h5>Starting from <span>$249/night</span></h5>
+                    <a href="../Billing/Billing.php"><button class="btn book-now"
+                            data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button></a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
     </section>
+
     <!-- partial -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js'></script>
     <script src="Services.js"></script>
-
-
-
-
 
     <footer class="footer" id="contact">
         <div class="section__container footer__container">
@@ -110,7 +176,7 @@ $loggedIn = isset($_SESSION['username']);
                 <ul class="footer__links">
                     <li><a href="#">Browse Destinations</a></li>
                     <li><a href="#">Special Offers & Packages</a></li>
-                    <li><a href="#">Room Types & Amenities</a></li>
+                    <li><a href="#">service Types & Amenities</a></li>
                     <li><a href="#">Customer Reviews & Ratings</a></li>
                     <li><a href="#">Travel Tips & Guides</a></li>
                 </ul>
@@ -122,12 +188,13 @@ $loggedIn = isset($_SESSION['username']);
                     <li><a href="#">Flexible Booking Options</a></li>
                     <li><a href="#">Airport Transfers</a></li>
                     <li><a href="#">Wellness & Recreation</a></li>
+                    <li><a href="#">Tour Guides & Extra Packages</a></li>
                 </ul>
             </div>
             <div class="footer__col">
                 <h4>CONTACT US</h4>
                 <ul class="footer__links">
-                    <li><a href="#">hoteleden2024kgm@gmail.com</a></li>
+                    <li><a href="mailto:hoteleden2024kgm@gmail.com">hoteleden2024kgm@gmail.com</a></li>
                 </ul>
                 <div class="footer__socials">
                     <a href="#"><img src="assetservice/facebook.png" alt="facebook" /></a>
