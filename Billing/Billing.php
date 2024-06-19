@@ -140,26 +140,26 @@ $conn->close();
                 <span class="error"><?php echo $errorMessages['num_guests']; ?></span>
             </fieldset>
 
-            <fieldset>
+           <!--  <fieldset>
                 <legend>Faturação</legend>
                 <label for="card_name">Nome do cartão:</label>
                 <input type="text" id="card_name" name="card_name" required>
-                <span class="error"><?php echo $errorMessages['card_name']; ?></span>
+                <span class="error"><//?php echo $errorMessages['card_name']; ?></span>
 
                 <label for="card_number">Número do cartão:</label>
                 <input type="text" id="card_number" name="card_number" required>
-                <span class="error"><?php echo $errorMessages['card_number']; ?></span>
+                <span class="error"><//?php echo $errorMessages['card_number']; ?></span>
 
                 <label for="card_expiry">Data de Expiração:</label>
                 <input type="month" id="card_expiry" name="card_expiry" required>
-                <span class="error"><?php echo $errorMessages['card_expiry']; ?></span>
+                <span class="error"><//?php echo $errorMessages['card_expiry']; ?></span>
 
                 <label for="card_cvc">CVC:</label>
                 <input type="text" id="card_cvc" name="card_cvc" required>
-                <span class="error"><?php echo $errorMessages['card_cvc']; ?></span>
-            </fieldset>
+                <span class="error"><//?php echo $errorMessages['card_cvc']; ?></span>
+            </fieldset> -->
             <a href="../Quartos/Quartos.php" class="avoltar">Voltar</a>
-            <button type="submit">Reserve Agora</button>
+            <a href="payment.php"><button type="submit">Check out</button></a>
         </form>
     </div>
 </body>
