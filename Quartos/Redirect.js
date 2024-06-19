@@ -4,7 +4,7 @@
     if (!loggedIn) {
       window.location.href = "../Login/Login.php";
     } else {
-      window.location.href = "../Billing/Billing.php";
+      
     }
   });
 }); 

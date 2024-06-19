@@ -2,6 +2,11 @@
 session_start();
 $loggedIn = isset($_SESSION['username']);
 
+require '../db.php';
+
+$query = "SELECT * FROM exhibit_rooms";
+$result = mysqli_query($conn, $query);
+$rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <html lang="en">
@@ -66,8 +71,8 @@ $loggedIn = isset($_SESSION['username']);
 
     <!-- Search Bar -->
     <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Pesquisar Quartos..." id="search-input" />
-      <button class="btn " id="search-btn">Pesquisar</button>
+      <input type="text" id="search-input" placeholder="Pesquisar Quartos..." />
+      <button class="btn" id="search-btn">Pesquisar</button>
     </div>
 
     <div class="room__grid">
@@ -92,9 +97,10 @@ $loggedIn = isset($_SESSION['username']);
           <h4>Deluxe Ocean View</h4>
           <p>Bask in luxury with breathtaking ocean views from your private suite.</p>
           <h5>Starting from <span>$299/night</span></h5>
-          
-            <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
-         
+
+          <button class="btn book-now" class="btn book-now"  data-room-type="Deluxe"
+            data-room-price="299"  data-room-number="12b" data-room-capacity="5"
+            data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
         </div>
       </div>
 
@@ -119,9 +125,11 @@ $loggedIn = isset($_SESSION['username']);
           <h4>Executive Cityscape Room</h4>
           <p>Experience urban elegance and modern comfort in the heart of the city.</p>
           <h5>Starting from <span>$199/night</span></h5>
-          
-            <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
-         
+
+          <button class="btn book-now" data-room-type="suite" data-room-price="199"
+           
+            data-room-number="23g" data-room-capacity="2"
+            data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
         </div>
       </div>
 
@@ -146,17 +154,14 @@ $loggedIn = isset($_SESSION['username']);
           <h4>Family Garden Retreat</h4>
           <p>Spacious and inviting, perfect for creating cherished memories with loved ones.</p>
           <h5>Starting from <span>$249/night</span></h5>
-          
-          <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
-          
+
+          <button class="btn book-now"  data-room-type="Family" data-room-price="249"
+           
+            data-room-number="78b" data-room-capacity="5"
+            data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
         </div>
       </div>
     </div>
-
-
-
-
-
   </section>
 
   <footer class="footer" id="contact">
@@ -209,6 +214,29 @@ $loggedIn = isset($_SESSION['username']);
     </div>
   </footer>
 
+
+  <script>
+    function bookNow(button) {
+      const roomType = button.getAttribute('data-room-type');
+      const roomPrice = button.getAttribute('data-room-price');
+      const roomNumber = button.getAttribute('data-room-number');
+      const roomCapacity = button.getAttribute('data-room-capacity');
+      const loggedIn = button.getAttribute('data-logged-in');
+
+      if (loggedIn === 'true') {
+        // Redirect to the billing page with the room information
+        window.location.href = `../Billing/Billing.php?room_Type=${roomType}&room_price=${roomPrice}&room_number=${roomNumber}&room_capacity=${roomCapacity}`;
+      }
+    }
+
+    // Attach event listeners to the book-now buttons
+    document.querySelectorAll('.btn.book-now').forEach(button => {
+      button.addEventListener('click', () => bookNow(button));
+    });
+  </script>
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="Quartos.js"></script>
   <script src="searchbar.js"></script>
