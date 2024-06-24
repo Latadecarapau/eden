@@ -245,7 +245,7 @@ $total_rooms = $result_rooms->fetch_assoc()['total_rooms'];
       <div class="explore__content">
         <p class="section__description" id="current-date-time"></p>
         <h4>Novo menu todos os dias no Eden Hotel.</h4>
-        <a href="../Cozinha/Cozinha.php"><button class="btn">Ver Menus</button></a>
+        <a href="../Cozinha/menu.php"><button class="btn">Ver Menus</button></a>
       </div>
     </div>
   </section>

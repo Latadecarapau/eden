@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>EdenDining</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="css/tooplate-crispy-kitchen.css" rel="stylesheet">
+
+    <!--
+
+Tooplate 2129 Crispy Kitchen
+
+https://www.tooplate.com/view/2129-crispy-kitchen
+
+-->
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-white shadow-lg">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="index.html">
+                EdenDining
+            </a>
+
+            <div class="d-lg-none">
+                <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#BookingModal">Reservation</button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Home/Home.php">EdenHotel</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="Mainkitchen.php">Home</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.php">Sobre Nós</a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+            <div class="d-none d-lg-block">
+                <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#BookingModal">Reservar Mesa</button>
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+
+        <header class="site-header site-menu-header">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-10 col-12 mx-auto">
+                        <h1 class="text-white">Our Menus</h1>
+
+                        <strong class="text-white">Perfect for all Breakfast, Lunch and Dinner</strong>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="overlay"></div>
+        </header>
+
+        <section class="menu section-padding">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12">
+                        <h2 class="mb-lg-5 mb-4">Breakfast Menu</h2>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="menu-thumb">
+                            <img src="images/breakfast/brett-jordan-8xt8-HIFqc8-unsplash.jpg"
+                                class="img-fluid menu-image" alt="">
+
+                            <div class="menu-info d-flex flex-wrap align-items-center">
+                                <h4 class="mb-0">Fresh Start</h4>
+
+                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>24.50</span>
+
+                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                    <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+
+                                    <div class="reviews-stars">
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                    </div>
+
+                                    <p class="reviews-text mb-0 ms-4">128 Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="menu-thumb">
+                            <img src="images/breakfast/lucas-swennen-1W_MyJSRLuQ-unsplash.jpg"
+                                class="img-fluid menu-image" alt="">
+
+                            <div class="menu-info d-flex flex-wrap align-items-center">
+                                <h4 class="mb-0">Baked Creamy</h4>
+
+                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>16.50</span>
+
+                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                    <div class="reviews-stars">
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                    </div>
+
+                                    <p class="reviews-text mb-0 ms-4">64 Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="menu-thumb">
+                            <img src="images/breakfast/louis-hansel-dphM2U1xq0U-unsplash.jpg"
+                                class="img-fluid menu-image" alt="">
+
+                            <div class="menu-info d-flex flex-wrap align-items-center">
+                                <h4 class="mb-0">Burger Set</h4>
+
+                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>24.50</span>
+
+                                <del class="ms-4"><small>$</small>36.50</del>
+
+                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                    <div class="reviews-stars">
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                    </div>
+
+                                    <p class="reviews-text mb-0 ms-4">32 Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="menu section-padding bg-white">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12">
+                        <h2 class="mb-lg-5 mb-4">Lunch Menu</h2>
+                    </div>
+
+                    <div class="col-lg-6 col-12">
+                        <div class="menu-thumb">
+                            <img src="images/lunch/louis-hansel-cH5IPjaAYyo-unsplash.jpg" class="img-fluid menu-image"
+                                alt="">
+
+                            <div class="menu-info d-flex flex-wrap align-items-center">
+                                <h4 class="mb-0">Super Steak Set</h4>
+
+                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>32.75</span>
+
+                                <del class="ms-4"><small>$</small>55</del>
+
+                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                    <h6 class="reviews-text mb-0 me-3">4.2/5</h6>
+
+                                    <div class="reviews-stars">
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                    </div>
+
+                                    <p class="reviews-text mb-0 ms-4">66 Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-12">
+                        <div class="menu-thumb">
+                            <img src="images/lunch/louis-hansel-rheOvfxOlOA-unsplash.jpg" class="img-fluid menu-image"
+                                alt="">
+
+                            <div class="menu-info d-flex flex-wrap align-items-center">
+                                <h4 class="mb-0">Bread &amp; Steak Set</h4>
+
+                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>42.50</span>
+
+                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                    <div class="reviews-stars">
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                    </div>
+
+                                    <p class="reviews-text mb-0 ms-4">84 Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="menu section-padding">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12">
+                        <h2 class="mb-lg-5 mb-4">Dinner Menu</h2>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="menu-thumb">
+                            <img src="images/dinner/farhad-ibrahimzade-ZipYER3NLhY-unsplash.jpg"
+                                class="img-fluid menu-image" alt="">
+
+                            <div class="menu-info d-flex flex-wrap align-items-center">
+                                <h4 class="mb-0">Seafood Set</h4>
+
+                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>65.50</span>
+
+                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                    <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+
+                                    <div class="reviews-stars">
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                    </div>
+
+                                    <p class="reviews-text mb-0 ms-4">102 Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="menu-thumb">
+                            <img src="images/dinner/keriliwi-c3mFafsFz2w-unsplash.jpg" class="img-fluid menu-image"
+                                alt="">
+
+                            <div class="menu-info d-flex flex-wrap align-items-center">
+                                <h4 class="mb-0">Premium Steak</h4>
+
+                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>74.25</span>
+
+                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                    <div class="reviews-stars">
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                    </div>
+
+                                    <p class="reviews-text mb-0 ms-4">56 Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="menu-thumb">
+                            <img src="images/dinner/farhad-ibrahimzade-isHUj3N0194-unsplash.jpg"
+                                class="img-fluid menu-image" alt="">
+
+                            <div class="menu-info d-flex flex-wrap align-items-center">
+                                <h4 class="mb-0">Salmon Set</h4>
+
+                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>60</span>
+
+                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                    <div class="reviews-stars">
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star-fill reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                        <i class="bi-star reviews-icon"></i>
+                                    </div>
+
+                                    <p class="reviews-text mb-0 ms-4">76 Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer section-padding">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <h4 class="text-white mb-4 me-5">EdenDining</h4>
+                </div>
+
+                <div class="col-lg-4 col-md-7 col-xs-12 tooplate-mt30">
+                    <h6 class="text-white mb-lg-4 mb-3">Localização</h6>
+
+                    <p>Av. dos Náufragos 29, 2970-637 Sesimbra</p>
+
+                    <a href="https://www.google.co.th/maps/place/Ribamar/@38.4433895,-9.1045032,161m/data=!3m1!1e3!4m6!3m5!1s0xd195221a531bec3:0xf09e9b3c1f8b1bd!8m2!3d38.4433413!4d-9.1046457!16s%2Fg%2F1tmcnhng?hl=en&entry=ttu"
+                        class="custom-btn btn btn-dark mt-2">Direções</a>
+                </div>
+
+                <div class="col-lg-4 col-md-5 col-xs-12 tooplate-mt30">
+                    <h6 class="text-white mb-lg-4 mb-3">Abertura</h6>
+
+                    <p class="mb-2">Segunda - Domingo</p>
+
+                    <p>9:00 AM - 22:00 PM</p>
+
+                    <p>Tel: <a href="tel: 010-02-0340" class="tel-link">010-02-0340</a></p>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-xs-12 tooplate-mt30">
+                    <h6 class="text-white mb-lg-4 mb-3">Social</h6>
+
+                    <ul class="social-icon">
+                        <li><a href="#" class="social-icon-link bi-facebook"></a></li>
+
+                        <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                        <<li><a href="#" target="_blank" class="social-icon-link bi-twitter"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+                    </ul>
+
+                    <p class="copyright-text tooplate-mt60">2023. Eden. All rights reserved.
+                        <br>Design: <a rel="nofollow" href="https://www.tooplate.com/" target="_blank">Tooplate</a>
+                    </p>
+
+                </div>
+
+            </div><!-- row ending -->
+
+        </div><!-- container ending -->
+
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="BookingModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="mb-0">Reserve a table</h3>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body d-flex flex-column justify-content-center">
+                    <div class="booking">
+
+                        <form class="booking-form row" role="form" action="#" method="post">
+                            <div class="col-lg-6 col-12">
+                                <label for="name" class="form-label">Nome Completo</label>
+
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Seu Nome"
+                                    required>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <label for="email" class="form-label">Email</label>
+
+                                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
+                                    placeholder="seu@email.com" required>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <label for="phone" class="form-label">Número de telefone</label>
+
+                                <input type="telephone" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                    class="form-control" placeholder="123-456-7890">
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <label for="people" class="form-label">Número de pessoas</label>
+
+                                <input type="text" name="people" id="people" class="form-control"
+                                    placeholder="12 Pessoas">
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <label for="date" class="form-label">Data</label>
+
+                                <input type="date" name="date" id="date" value="" class="form-control">
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <label for="time" class="form-label">Horas a reservar</label>
+
+                                <select class="form-select form-control" name="time" id="time">
+                                    <option value="5" selected>9:00 AM</option>
+                                    <option value="6">10:00 AM</option>
+                                    <option value="6">11:00 AM</option>
+                                    <option value="6">12:00 AM</option>
+                                    <option value="6">13:00 PM</option>
+                                    <option value="6">14:00 PM</option>
+                                    <option value="6">15:00 PM</option>
+                                    <option value="6">16:00 PM</option>
+                                    <option value="6">17:00 PM</option>
+                                    <option value="7">18:00 PM</option>
+                                    <option value="8">19:00 PM</option>
+                                    <option value="9">20:00 PM</option>
+                                    <option value="9">21:00 PM</option>
+                                    <option value="9">22:00 PM</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <label for="people" class="form-label">Preferencia de mesa</label>
+
+                                <input type="text" name="table" id="table" class="form-control"
+                                    placeholder="Canto, Meio">
+                            </div>
+
+                            <div class="col-12">
+                                <label for="message" class="form-label">Pedido Especial</label>
+
+                                <textarea class="form-control" rows="4" id="message" name="message"
+                                    placeholder=""></textarea>
+                            </div>
+
+                            <div class="col-lg-4 col-12 ms-auto">
+                                <button type="submit" class="form-control">Submit Request</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/custom.js"></script>
+
+</body>
+
+</html>

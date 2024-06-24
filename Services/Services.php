@@ -11,27 +11,9 @@ $loggedIn = isset($_SESSION['username']);
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="Services.css" />
     <title>services</title>
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
-    <!-- Vendor Script -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <!-- Fonts css load -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link id="fontsLink" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
 
-    <!-- Layout config Js -->
-    <script src="assets/js/layout.js"></script>
-    <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css">
-    <!-- App Css-->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css">
-    <!-- custom Css-->
-    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css">
+
+    
 </head>
 
 <body>
@@ -51,6 +33,8 @@ $loggedIn = isset($_SESSION['username']);
                 <li><a href="../Quartos/Quartos.php">Quartos</a></li>
                 <li><a href="../Home/explore">Explore</a></li>
                 <li><a href="../Contactos/ContactForm.php">Contact-nos</a></li>
+                
+                
 
                 <?php if ($loggedIn): ?>
                     <li>
@@ -73,85 +57,76 @@ $loggedIn = isset($_SESSION['username']);
                     <li><a href="../Registar/Registar.php">Register</a></li>
                 <?php endif; ?>
             </ul>
-            <button class="btn nav__btn">Book Now</button>
+            <button class="btn nav__btn">Checkout</button>
         </nav>
     </header>
     <section class="section__container service__container">
-        <p class="section__subheader">Pacotes para todos </p>
-        <h2 class="section__header">Compre seu pacote agora .</h2>
+    <p class="section__subheader">Pacotes para todos</p>
+    <h2 class="section__header">Compre seu pacote agora.</h2>
 
-        <!-- Search Bar -->
-        <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Pesquise Pacotes..." id="search-input" />
-            <button class="btn " id="search-btn">Procurar</button>
-        </div>
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Pesquise Pacotes..." />
+        <button class="btn" id="search-btn">Procurar</button>
+    </div>
 
-        <div class="service__grid">
-            <div class="service__card">
-                <div class="service__card__image">
-                    <img src="assetsservice/service-1.jpg" alt="service" />
-                    <div class="service__card__icons">
-                        <span><i class="ri-heart-fill"></i></span>
-                        <span><i class="ri-paint-fill"></i></span>
-                        <span><i class="ri-shield-star-line"></i></span>
-                    </div>
-                </div>
-                <div class="service__card__details">
-                    <h4>Pacote tour</h4>
-                    <p>
-                        Bask in luxury with breathtaking ocean views from your private suite.
-                    </p>
-                    <h5>Starting from <span>$299/night</span></h5>
-                    <a href="../Billing/Billing.php"> <button class="btn book-now"
-                            data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button></a>
+    <div class="service__grid">
+        <div class="service__card">
+            <div class="service__card__image">
+                <img src="assetsservice/service-1.jpg" alt="Pacote tour" />
+                <div class="service__card__icons">
+                    <span><i class="ri-heart-fill"></i></span>
+                    <span><i class="ri-paint-fill"></i></span>
+                    <span><i class="ri-shield-star-line"></i></span>
                 </div>
             </div>
-            <div class="service__card">
-                <div class="service__card__image">
-                    <img src="assetsservices/service-2.jpg" alt="service" />
-                    <div class="service__card__icons">
-                        <span><i class="ri-heart-fill"></i></span>
-                        <span><i class="ri-paint-fill"></i></span>
-                        <span><i class="ri-shield-star-line"></i></span>
-                    </div>
-                </div>
-                <div class="service__card__details">
-                    <h4>Executive Cityscape service</h4>
-                    <p>
-                        Experience urban elegance and modern comfort in the heart of the city.
-                    </p>
-                    <h5>Starting from <span>$199/night</span></h5>
-                    <a href="../Billing/Billing.php"> <button class="btn book-now"
-                            data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button></a>
-                </div>
-            </div>
-            <div class="service__card">
-                <div class="service__card__image">
-                    <img src="assetsservices/service-3.jpg" alt="service" />
-                    <div class="service__card__icons">
-                        <span><i class="ri-heart-fill"></i></span>
-                        <span><i class="ri-paint-fill"></i></span>
-                        <span><i class="ri-shield-star-line"></i></span>
-                    </div>
-                </div>
-                <div class="service__card__details">
-                    <h4>Family Garden Retreat</h4>
-                    <p>
-                        Spacious and inviting, perfect for creating cherished memories
-                        with loved ones.
-                    </p>
-                    <h5>Starting from <span>$249/night</span></h5>
-                    <a href="../Billing/Billing.php"><button class="btn book-now"
-                            data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button></a>
-                </div>
+            <div class="service__card__details">
+                <h4>Pacote tour</h4>
+                <p>Bask in luxury with breathtaking ocean views from your private suite.</p>
+                <h5>Starting from <span>$299/night</span></h5>
+                
+                    <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
+               
             </div>
         </div>
-
-
-
-
-
-    </section>
+        <div class="service__card">
+            <div class="service__card__image">
+                <img src="assetsservice/service-2.jpg" alt="Executive Cityscape service" />
+                <div class="service__card__icons">
+                    <span><i class="ri-heart-fill"></i></span>
+                    <span><i class="ri-paint-fill"></i></span>
+                    <span><i class="ri-shield-star-line"></i></span>
+                </div>
+            </div>
+            <div class="service__card__details">
+                <h4>Executive Cityscape service</h4>
+                <p>Experience urban elegance and modern comfort in the heart of the city.</p>
+                <h5>Starting from <span>$199/night</span></h5>
+               
+                    <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
+              
+            </div>
+        </div>
+        <div class="service__card">
+            <div class="service__card__image">
+                <img src="assetsservice/service-3.jpg" alt="Family Garden Retreat" />
+                <div class="service__card__icons">
+                    <span><i class="ri-heart-fill"></i></span>
+                    <span><i class="ri-paint-fill"></i></span>
+                    <span><i class="ri-shield-star-line"></i></span>
+                </div>
+            </div>
+            <div class="service__card__details">
+                <h4>Family Garden Retreat</h4>
+                <p>Spacious and inviting, perfect for creating cherished memories with loved ones.</p>
+                <h5>Starting from <span>$249/night</span></h5>
+               
+                    <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">buy Now</button>
+               
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- partial -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
