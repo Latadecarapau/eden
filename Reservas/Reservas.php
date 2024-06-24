@@ -20,7 +20,7 @@ if ($loggedIn) {
 // Fetch reservations for the logged-in user
 $reservations = [];
 if ($email) {
-    $sql = "SELECT id_reservation, name, email, telephone, type_of_room, room_number, check_in, check_out, num_guests, created_at FROM reservations WHERE email = ?";
+    $sql = "SELECT id_reservation, name, email, telephone, type_of_room, room_number, room_name,check_in, check_out, num_guests, created_at FROM reservations WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -169,6 +169,7 @@ $conn->close();
                                 <td><?php echo htmlspecialchars($reservation['telephone']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['type_of_room']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['room_number']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['room_name']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['check_in']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['check_out']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['num_guests']); ?></td>

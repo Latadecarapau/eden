@@ -1,6 +1,8 @@
 <?php
+require '../db.php';
 session_start();
 $loggedIn = isset($_SESSION['username']);
+
 
 ?>
 
@@ -12,6 +14,109 @@ $loggedIn = isset($_SESSION['username']);
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="Quartos.css" />
   <title>Rooms</title>
+  <style>
+    .room__card {
+      border: 1px solid #ddd;
+      margin: 10px;
+      padding: 10px;
+      width: 400px;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .slide {
+      width: 100%;
+      display: none;
+    }
+
+    .slide.active {
+      display: block;
+    }
+  </style>
+  <script>
+    async function fetchRoomData() {
+      try {
+        const response = await fetch('fetch_rooms.php');
+        const rooms = await response.json();
+
+        if (rooms && rooms.length > 0) {
+          const container = document.getElementById('roomsContainer');
+          container.innerHTML = ''; // Clear any existing content
+
+          rooms.forEach((room, index) => {
+            const roomCard = document.createElement('div');
+            roomCard.className = 'room__card';
+            const imagesHTML = room.images.map((img, i) => `
+              <img src="${img}" alt="room" class="slide ${i === 0 ? 'active' : ''}" />
+            `).join('');
+            roomCard.innerHTML = `
+              <div class="room__card__image">
+                <div class="slider slider-${index + 1}">
+                  <div class="slides slides-${index + 1}">
+                    ${imagesHTML}
+                  </div>
+                  <button class="prev" onclick="moveSlide(-1, 'slides-${index + 1}')">&#10094;</button>
+                  <button class="next" onclick="moveSlide(1, 'slides-${index + 1}')">&#10095;</button>
+                </div>
+                <div class="room__card__icons">
+                  <span><i class="ri-heart-fill"></i></span>
+                  <span><i class="ri-paint-fill"></i></span>
+                  <span><i class="ri-shield-star-line"></i></span>
+                </div>
+              </div>
+              <div class="room__card__details">
+                <h4>${room.room_name}</h4>
+                <p>${room.Description}</p>
+                <p><strong>Tipo de quarto:</strong> ${room.id_room}</p>
+                <p><strong>Número do Quarto:</strong> ${room.room_number}</p>
+                <p><strong>Capacidade:</strong> ${room.capacity}</p>
+                <h5>Preço <span>$${room.price}/Noite</span></h5>
+                   <button class="btn book-now"data-logged-in="${<?php echo $loggedIn ? 'true' : 'false'; ?>}" data-id="${room.id_room}" data-number="${room.room_number}" data-capacity="${room.capacity}" onclick="handleBookNow(this)">Book Now</button>
+              </div>
+            `;
+            container.appendChild(roomCard);
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching room data:', error);
+      }
+    }
+
+    function moveSlide(n, sliderClass) {
+      const slides = document.querySelectorAll(`.${sliderClass} .slide`);
+      let activeIndex = -1;
+
+      slides.forEach((slide, index) => {
+        if (slide.classList.contains('active')) {
+          activeIndex = index;
+          slide.classList.remove('active');
+        }
+      });
+
+      activeIndex = (activeIndex + n + slides.length) % slides.length;
+      slides[activeIndex].classList.add('active');
+    }
+    function handleBookNow(button) {
+      const loggedIn = button.getAttribute('data-logged-in') === 'true';
+
+      if (loggedIn) {
+        const roomData = {
+          id: button.getAttribute('data-id'),
+          number: button.getAttribute('data-number'),
+          name: button.getAttribute('data-name'),
+          capacity: button.getAttribute('data-capacity')
+        };
+        sessionStorage.setItem('roomData', JSON.stringify(roomData));
+        // Redirect to booking page or perform booking action
+        window.location.href = '../Billing/Billing.php';
+      } else {
+        // Redirect to login page
+        window.location.href = '../Login/Login.php';
+      }
+    }
+
+    window.onload = fetchRoomData;
+  </script>
 
 </head>
 
@@ -60,104 +165,11 @@ $loggedIn = isset($_SESSION['username']);
   </header>
 
 
-  <section class="section__container room__container">
-    <p class="section__subheader">Quartos para todos</p>
-    <h2 class="section__header">Faça a sua reserva agora .</h2>
 
-    <!-- Search Bar -->
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Pesquisar Quartos..." id="search-input" />
-      <button class="btn " id="search-btn">Pesquisar</button>
-    </div>
-
-    <div class="room__grid">
-      <div class="room__card">
-        <div class="room__card__image">
-          <div class="slider slider-1">
-            <div class="slides slides-1">
-              <img src="assetsrooms/room-1.jpg" alt="room" class="slide active" />
-              <img src="assetsrooms/room-2.jpg" alt="room" class="slide" />
-              <img src="assetsrooms/room-3.jpg" alt="room" class="slide" />
-            </div>
-            <button class="prev" onclick="moveSlide(-1, 'slides-1')">&#10094;</button>
-            <button class="next" onclick="moveSlide(1, 'slides-1')">&#10095;</button>
-          </div>
-          <div class="room__card__icons">
-            <span><i class="ri-heart-fill"></i></span>
-            <span><i class="ri-paint-fill"></i></span>
-            <span><i class="ri-shield-star-line"></i></span>
-          </div>
-        </div>
-        <div class="room__card__details">
-          <h4>Deluxe Ocean View</h4>
-          <p>Bask in luxury with breathtaking ocean views from your private suite.</p>
-          <h5>Starting from <span>$299/night</span></h5>
-          
-            <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
-         
-        </div>
-      </div>
-
-      <div class="room__card">
-        <div class="room__card__image">
-          <div class="slider slider-2">
-            <div class="slides slides-2">
-              <img src="assetsrooms/room-4.jpg" alt="room" class="slide active" />
-              <img src="assetsrooms/room-5.jpg" alt="room" class="slide" />
-              <img src="assetsrooms/room-6.jpg" alt="room" class="slide" />
-            </div>
-            <button class="prev" onclick="moveSlide(-1, 'slides-2')">&#10094;</button>
-            <button class="next" onclick="moveSlide(1, 'slides-2')">&#10095;</button>
-          </div>
-          <div class="room__card__icons">
-            <span><i class="ri-heart-fill"></i></span>
-            <span><i class="ri-paint-fill"></i></span>
-            <span><i class="ri-shield-star-line"></i></span>
-          </div>
-        </div>
-        <div class="room__card__details">
-          <h4>Executive Cityscape Room</h4>
-          <p>Experience urban elegance and modern comfort in the heart of the city.</p>
-          <h5>Starting from <span>$199/night</span></h5>
-          
-            <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
-         
-        </div>
-      </div>
-
-      <div class="room__card">
-        <div class="room__card__image">
-          <div class="slider slider-3">
-            <div class="slides slides-3">
-              <img src="assetsrooms/room-7.jpg" alt="room" class="slide active" />
-              <img src="assetsrooms/room-8.jpg" alt="room" class="slide" />
-              <img src="assetsrooms/room-9.jpg" alt="room" class="slide" />
-            </div>
-            <button class="prev" onclick="moveSlide(-1, 'slides-3')">&#10094;</button>
-            <button class="next" onclick="moveSlide(1, 'slides-3')">&#10095;</button>
-          </div>
-          <div class="room__card__icons">
-            <span><i class="ri-heart-fill"></i></span>
-            <span><i class="ri-paint-fill"></i></span>
-            <span><i class="ri-shield-star-line"></i></span>
-          </div>
-        </div>
-        <div class="room__card__details">
-          <h4>Family Garden Retreat</h4>
-          <p>Spacious and inviting, perfect for creating cherished memories with loved ones.</p>
-          <h5>Starting from <span>$249/night</span></h5>
-          
-          <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
-          
-        </div>
-      </div>
-    </div>
+  <div id="roomsContainer">
 
 
-
-
-
-  </section>
+  </div>
 
   <footer class="footer" id="contact">
     <div class="section__container footer__container">
@@ -212,7 +224,7 @@ $loggedIn = isset($_SESSION['username']);
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="Quartos.js"></script>
   <script src="searchbar.js"></script>
-  <script src="Redirect.js"></script>
+  <!-- <script src="Redirect.js"></script> -->
 
 </body>
 
