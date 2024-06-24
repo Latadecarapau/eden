@@ -18,6 +18,19 @@ if ($result->num_rows == 0) {
 
 $user_details = $result->fetch_assoc();
 
+
+
+var_dump($_GET);
+$roomType = $_GET['roomType'];
+$roomNumber = $_GET['roomNumber'];
+$roomCapacity = $_GET['roomCapacity'];
+$roomPrice = $_GET['roomPrice'];
+
+if (!$roomType || !$roomNumber || !$roomCapacity ||  !$room_Price) {
+    echo "Missing required room details.";
+    exit();
+}
+
 $errorMessages = array(
     "name" => "",
     "telephone" => "",
@@ -52,6 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($check_out_date <= $check_in_date) {
         $errorMessages["check_out"] = "Check-out date must be later than the check-in date.";
+        $valid = false;
+    }
+
+    if ($num_guests > $room_details['capacity']) {
+        $errorMessages["num_guests"] = "Number of guests exceeds the room capacity of " . $room_details['capacity'] . ".";
         $valid = false;
     }
 
@@ -123,13 +141,14 @@ $conn->close();
                 <legend>Informação Pessoal</legend>
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name"
-                    value="<?php echo $user_details['firstname'] . ' ' . $user_details['lastname']; ?>" readonly>
-                <span class="error"><?php echo $errorMessages['name']; ?></span>
+                    value="<?php echo htmlspecialchars($user_details['firstname'] . ' ' . $user_details['lastname']); ?>"
+                    readonly>
+                <span class="error"><?php echo htmlspecialchars($errorMessages['name']); ?></span>
 
                 <label for="telephone">Número de Telefone:</label>
-                <input type="tel" id="telephone" name="telephone" value="<?php echo $user_details['telephone']; ?>"
-                    readonly>
-                <span class="error"><?php echo $errorMessages['telephone']; ?></span>
+                <input type="tel" id="telephone" name="telephone"
+                    value="<?php echo htmlspecialchars($user_details['telephone']); ?>" readonly>
+                <span class="error"><?php echo htmlspecialchars($errorMessages['telephone']); ?></span>
 
                 <label for="email">Email:</label>
                 <input type="text" id="email" name="email" value="<?php echo $user_details['email']; ?>" readonly>
@@ -143,14 +162,16 @@ $conn->close();
                     <option value="2">Deluxe</option>
                     <option value="3">Family</option>
                 </select>
-                <span class="error"><?php echo $errorMessages['type_of_room']; ?></span>
+                <span class="error"><?php echo htmlspecialchars($errorMessages['type_of_room']); ?></span>
 
                 <label for="room_number">Número do Quarto:</label>
-                <input type="text" id="room_number" name="room_number" required>
-                <span class="error"><?php echo $errorMessages['room_number']; ?></span>
+                <input type="text" id="room_number" name="room_number"
+                    value="<?php echo htmlspecialchars($roomNumber); ?>" required>
+                <span class="error"><?php echo htmlspecialchars($errorMessages['room_number']); ?></span>
 
+                <label for="check_in">Check-in:</label>
                 <input type="date" id="check_in" name="check_in" required>
-                <span class="error"><?php echo $errorMessages['check_in']; ?></span>
+                <span class="error"><?php echo htmlspecialchars($errorMessages['check_in']); ?></span>
 
                 <label for="check_out">Check-out:</label>
                 <input type="date" id="check_out" name="check_out" required>

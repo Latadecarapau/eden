@@ -4,6 +4,11 @@ session_start();
 $loggedIn = isset($_SESSION['username']);
 
 
+require '../db.php';
+
+$query = "SELECT * FROM exhibit_rooms";
+$result = mysqli_query($conn, $query);
+$rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <html lang="en">
@@ -221,6 +226,29 @@ $loggedIn = isset($_SESSION['username']);
     </div>
   </footer>
 
+
+  <script>
+    function bookNow(button) {
+      const roomType = button.getAttribute('data-room-type');
+      const roomPrice = button.getAttribute('data-room-price');
+      const roomNumber = button.getAttribute('data-room-number');
+      const roomCapacity = button.getAttribute('data-room-capacity');
+      const loggedIn = button.getAttribute('data-logged-in');
+
+      if (loggedIn === 'true') {
+        // Redirect to the billing page with the room information
+        window.location.href = `../Billing/Billing.php?room_Type=${roomType}&room_price=${roomPrice}&room_number=${roomNumber}&room_capacity=${roomCapacity}`;
+      }
+    }
+
+    // Attach event listeners to the book-now buttons
+    document.querySelectorAll('.btn.book-now').forEach(button => {
+      button.addEventListener('click', () => bookNow(button));
+    });
+  </script>
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="Quartos.js"></script>
   <script src="searchbar.js"></script>
