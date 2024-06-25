@@ -20,27 +20,19 @@ $user_details = $result->fetch_assoc();
 
 
 
-var_dump($_GET);
-$roomType = $_GET['roomType'];
-$roomNumber = $_GET['roomNumber'];
-$roomCapacity = $_GET['roomCapacity'];
-$roomPrice = $_GET['roomPrice'];
+// Retrieve posted room details
+$id_room = isset($_POST['id_room']) ? $_POST['id_room'] : '';
+$room_number = isset($_POST['room_number']) ? $_POST['room_number'] : '';
+$capacity = isset($_POST['capacity']) ? $_POST['capacity'] : '';
 
-if (!$roomType || !$roomNumber || !$roomCapacity ||  !$room_Price) {
-    echo "Missing required room details.";
-    exit();
-}
-
-$errorMessages = array(
-    "name" => "",
-    "telephone" => "",
-    "type_of_room" => "",
-    "room_number" => "",
-    "check_in" => "",
-    "check_out" => "",
-    "num_guests" => ""
-);
-
+// Define error messages (for demonstration purposes)
+$errorMessages = [
+    'type_of_room' => '',
+    'room_number' => '',
+    'check_in' => '',
+    'check_out' => '',
+    'num_guests' => ''
+];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $user_details['firstname'] . " " . $user_details['lastname'];
     $email = $user_details['email'];
@@ -143,12 +135,12 @@ $conn->close();
                 <input type="text" id="name" name="name"
                     value="<?php echo htmlspecialchars($user_details['firstname'] . ' ' . $user_details['lastname']); ?>"
                     readonly>
-                <span class="error"><?php echo htmlspecialchars($errorMessages['name']); ?></span>
+                
 
                 <label for="telephone">Número de Telefone:</label>
                 <input type="tel" id="telephone" name="telephone"
                     value="<?php echo htmlspecialchars($user_details['telephone']); ?>" readonly>
-                <span class="error"><?php echo htmlspecialchars($errorMessages['telephone']); ?></span>
+                
 
                 <label for="email">Email:</label>
                 <input type="text" id="email" name="email" value="<?php echo $user_details['email']; ?>" readonly>

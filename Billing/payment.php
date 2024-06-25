@@ -123,7 +123,7 @@
               <label for="security-code">Security Code</label>
               <input id="security-code" name="security-code" placeholder="Security Code" required type="password" />
             </div>
-            <button class="checkout-btn" type="submit">Check Out</button>
+            <button class="btn" type="submit">Check Out</button>
           </form>
         </div>
       </div>
