@@ -1,3 +1,59 @@
+<?php
+require '../db.php';
+session_start();
+
+$loggedIn = isset($_SESSION['username']);
+
+if (!$loggedIn) {
+    // Redirect to login with form data as query parameters
+    $query = http_build_query($_POST);
+    header("Location: login.php?$query");
+    exit();
+}
+
+// Fetch user details if logged in
+$user_id = $_SESSION['user_id']; // Assuming user ID is stored in session
+$user_query = $conn->prepare("SELECT firstname, lastname, email, telephone FROM users WHERE id = ?");
+$user_query->bind_param("i", $user_id);
+$user_query->execute();
+$user_result = $user_query->get_result();
+$user = $user_result->fetch_assoc();
+
+$nome_completo = $user['firstname'] . ' ' . $user['lastname'];
+$email = $user['email'];
+$numero_telefone = $user['telephone'];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome_completo = $_POST['name'] ?? null;
+    $email = $_POST['email'] ?? null;
+    $numero_telefone = $_POST['phone'] ?? null;
+    $numero_pessoas = $_POST['people'] ?? null;
+    $data = $_POST['date'] ?? null;
+    $hora = $_POST['time'] ?? null;
+    $preferencia_mesa = $_POST['table'] ?? null;
+    $pedido_especial = $_POST['message'] ?? null;
+
+
+    if ($nome_completo && $email && $numero_telefone && $numero_pessoas && $data && $hora && $preferencia_mesa && $pedido_especial) {
+        $stmt = $conn->prepare("INSERT INTO reservation_restaurant (nome_completo, email, numero_telefone, numero_pessoas, data, hora, preferencia_mesa, pedido_especial) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssss", $nome_completo, $email, $numero_telefone, $numero_pessoas, $data, $hora, $preferencia_mesa, $pedido_especial);
+
+        if ($stmt->execute()) {
+            echo "New reservation created successfully";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
+    } else {
+        echo "All fields are required.";
+    }
+}
+$conn->close();
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -14,6 +70,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="Cozinha.css" />
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +78,7 @@
     <link href="css/bootstrap-icons.css" rel="stylesheet">
 
     <link href="css/tooplate-crispy-kitchen.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
 
     <!--
 
@@ -63,7 +121,26 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                     <li class="nav-item">
                         <a class="nav-link" href="about.php">Sobre Nós</a>
                     </li>
-
+                    <?php if ($loggedIn): ?>
+                        <li>
+                            <div class="user-profile">
+                                <div class="dropdown">
+                                    <button class="dropbtn">
+                                        <i class="ri-user-line"></i>
+                                        <span><?php echo $_SESSION['username']; ?></span>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a href="../Profile/Profile.php">Profile</a>
+                                        <a href="#">Settings</a>
+                                        <a href="../Logout/logout.php">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <?php else: ?>
+                        <li><a href="../Login/Login.php">Login</a></li>
+                        <li><a href="../Registar/Registar.php">Register</a></li>
+                    <?php endif; ?>
 
                 </ul>
             </div>
@@ -412,96 +489,74 @@ https://www.tooplate.com/view/2129-crispy-kitchen
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="mb-0">Reserve a table</h3>
-
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
                 <div class="modal-body d-flex flex-column justify-content-center">
                     <div class="booking">
-
-                        <form class="booking-form row" role="form" action="#" method="post">
+                        <form class="booking-form row" role="form" action="../Reservas/Reservas.php" method="post">
                             <div class="col-lg-6 col-12">
                                 <label for="name" class="form-label">Nome Completo</label>
-
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Seu Nome"
-                                    required>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="<?php echo htmlspecialchars($nome_completo); ?>" required>
                             </div>
-
                             <div class="col-lg-6 col-12">
                                 <label for="email" class="form-label">Email</label>
-
-                                <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
-                                    placeholder="seu@email.com" required>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="<?php echo htmlspecialchars($nome_completo); ?>" required>
                             </div>
-
                             <div class="col-lg-6 col-12">
                                 <label for="phone" class="form-label">Número de telefone</label>
-
-                                <input type="telephone" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                    class="form-control" placeholder="123-456-7890">
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                    value="<?php echo htmlspecialchars($numero_telefone); ?>" required>
                             </div>
-
                             <div class="col-lg-6 col-12">
                                 <label for="people" class="form-label">Número de pessoas</label>
-
                                 <input type="text" name="people" id="people" class="form-control"
-                                    placeholder="12 Pessoas">
+                                    placeholder="12 Pessoas"
+                                    value="<?php echo htmlspecialchars($_GET['people'] ?? ''); ?>">
                             </div>
-
                             <div class="col-lg-6 col-12">
                                 <label for="date" class="form-label">Data</label>
-
-                                <input type="date" name="date" id="date" value="" class="form-control">
+                                <input type="date" name="date" id="date"
+                                    value="<?php echo htmlspecialchars($_GET['date'] ?? ''); ?>" class="form-control">
                             </div>
-
                             <div class="col-lg-6 col-12">
                                 <label for="time" class="form-label">Horas a reservar</label>
-
                                 <select class="form-select form-control" name="time" id="time">
-                                    <option value="5" selected>9:00 AM</option>
-                                    <option value="6">10:00 AM</option>
-                                    <option value="6">11:00 AM</option>
-                                    <option value="6">12:00 AM</option>
-                                    <option value="6">13:00 PM</option>
-                                    <option value="6">14:00 PM</option>
-                                    <option value="6">15:00 PM</option>
-                                    <option value="6">16:00 PM</option>
-                                    <option value="6">17:00 PM</option>
-                                    <option value="7">18:00 PM</option>
-                                    <option value="8">19:00 PM</option>
-                                    <option value="9">20:00 PM</option>
-                                    <option value="9">21:00 PM</option>
-                                    <option value="9">22:00 PM</option>
+                                    <option value="09:00:00" <?php echo (($_GET['time'] ?? '') == '09:00:00') ? 'selected' : ''; ?>>9:00 AM</option>
+                                    <option value="10:00:00" <?php echo (($_GET['time'] ?? '') == '10:00:00') ? 'selected' : ''; ?>>10:00 AM</option>
+                                    <option value="11:00:00" <?php echo (($_GET['time'] ?? '') == '11:00:00') ? 'selected' : ''; ?>>11:00 AM</option>
+                                    <option value="12:00:00" <?php echo (($_GET['time'] ?? '') == '12:00:00') ? 'selected' : ''; ?>>12:00 PM</option>
+                                    <option value="13:00:00" <?php echo (($_GET['time'] ?? '') == '13:00:00') ? 'selected' : ''; ?>>1:00 PM</option>
+                                    <option value="14:00:00" <?php echo (($_GET['time'] ?? '') == '14:00:00') ? 'selected' : ''; ?>>2:00 PM</option>
+                                    <option value="15:00:00" <?php echo (($_GET['time'] ?? '') == '15:00:00') ? 'selected' : ''; ?>>3:00 PM</option>
+                                    <option value="16:00:00" <?php echo (($_GET['time'] ?? '') == '16:00:00') ? 'selected' : ''; ?>>4:00 PM</option>
+                                    <option value="17:00:00" <?php echo (($_GET['time'] ?? '') == '17:00:00') ? 'selected' : ''; ?>>5:00 PM</option>
+                                    <option value="18:00:00" <?php echo (($_GET['time'] ?? '') == '18:00:00') ? 'selected' : ''; ?>>6:00 PM</option>
+                                    <option value="19:00:00" <?php echo (($_GET['time'] ?? '') == '19:00:00') ? 'selected' : ''; ?>>7:00 PM</option>
+                                    <option value="20:00:00" <?php echo (($_GET['time'] ?? '') == '20:00:00') ? 'selected' : ''; ?>>8:00 PM</option>
                                 </select>
                             </div>
-                            <div class="col-lg-6 col-12">
-                                <label for="people" class="form-label">Preferencia de mesa</label>
-
-                                <input type="text" name="table" id="table" class="form-control"
-                                    placeholder="Canto, Meio">
-                            </div>
-
                             <div class="col-12">
-                                <label for="message" class="form-label">Pedido Especial</label>
-
-                                <textarea class="form-control" rows="4" id="message" name="message"
-                                    placeholder=""></textarea>
+                                <label for="table" class="form-label">Preferência de mesa</label>
+                                <input type="text" name="table" id="table" class="form-control" placeholder=""
+                                    value="<?php echo htmlspecialchars($_GET['table'] ?? ''); ?>">
                             </div>
-
+                            <div class="col-12">
+                                <label for="message" class="form-label">Mensagem adicional</label>
+                                <textarea class="form-control" rows="4" id="message" name="message"
+                                    placeholder="Mensagem Adicional"><?php echo htmlspecialchars($_GET['message'] ?? ''); ?></textarea>
+                            </div>
                             <div class="col-lg-4 col-12 ms-auto">
-                                <button type="submit" class="form-control">Submit Request</button>
+                                <button type="submit" class="form-control">Enviar Reservas</button>
                             </div>
                         </form>
                     </div>
                 </div>
-
                 <div class="modal-footer"></div>
-
             </div>
-
         </div>
     </div>
-
     <!-- JAVASCRIPT FILES -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>

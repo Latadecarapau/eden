@@ -4,8 +4,6 @@ session_start();
 $loggedIn = isset($_SESSION['username']);
 
 
-require '../db.php';
-
 $query = "SELECT * FROM exhibit_rooms";
 $result = mysqli_query($conn, $query);
 $rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);

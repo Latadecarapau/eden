@@ -31,10 +31,21 @@ if ($email) {
     $stmt->close();
 }
 
+$reservationrestaurant = [];
+if ($email) {
+    $sql = "SELECT 	id_restaurant, nome_completo, email, numero_telefone, numero_pessoas, data, hora, preferencia_mesa, pedido_especial FROM reservation_restaurant WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $reservationrestaurant[] = $row;
+    }
+    $stmt->close();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_reservation = $_POST['id_reservation'];
-
-    // Fetch the reservation creation date
     $sql = "SELECT created_at FROM reservations WHERE id_reservation = ?";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
@@ -168,7 +179,7 @@ $conn->close();
                                 <td><?php echo htmlspecialchars($reservation['email']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['telephone']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['type_of_room']); ?></td>
-                                <td><?php echo htmlspecialchars($reservation['room_number']); ?></td>                               
+                                <td><?php echo htmlspecialchars($reservation['room_number']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['check_in']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['check_out']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['num_guests']); ?></td>
@@ -179,6 +190,48 @@ $conn->close();
                                     <?php else: ?>
                                         <button class="cancel-btn" disabled>Cancelamento impossivel</button>
                                     <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="10">Não encontramos reservas.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+            <h2>Reservas de Restaurante</h2>
+            <table class="reservations-table">
+                <thead>
+                    <tr>
+                        <th>Reserva ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Número de Pessoas</th>
+                        <th>Data da Reserva</th>
+                        <th>Hora da Reserva</th>
+                        <th>Preferência de Mesa</th>
+                        <th>Pedido Especial</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($reservationrestaurant)): ?>
+                        <?php foreach ($reservationrestaurant as $reservation): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($reservation['id_restaurant']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['nome_completo']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['email']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['numero_telefone']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['numero_pessoas']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['data']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['hora']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['preferencia_mesa']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['pedido_especial']); ?></td>
+                                <td>
+                                    <button class="cancel-btn"
+                                        onclick="showModal(<?php echo $reservation['id_restaurant']; ?>)">Cancel</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
