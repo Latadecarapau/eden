@@ -6,7 +6,7 @@ require '../db.php';
 
 if ($loggedIn) {
     $username = $_SESSION['username'];
-    $sql = "SELECT userName, firstname, lastname, email, telephone FROM users WHERE userName = ?";
+    $sql = "SELECT username, firstname, lastname, email, telephone FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();

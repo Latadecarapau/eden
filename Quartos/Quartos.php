@@ -74,7 +74,7 @@ $rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <p><strong>Número do Quarto:</strong> ${room.room_number}</p>
                 <p><strong>Capacidade:</strong> ${room.capacity}</p>
                 <h5>Preço <span>$${room.price}/Noite</span></h5>
-                   <button class="btn book-now"data-logged-in="${<?php echo $loggedIn ? 'true' : 'false'; ?>}" data-id="${room.id_room}" data-number="${room.room_number}" data-capacity="${room.capacity}" onclick="handleBookNow(this)">Book Now</button>
+                   <button class="btn book-now"data-logged-in="${<?php echo $loggedIn ? 'true' : 'false'; ?>}" data-id="${room.id_room}" data-number="${room.room_number}"data-name="${room.room_name}" data-capacity="${room.capacity}"data-price="${room.price}" onclick="handleBookNow(this)">Book Now</button>
               </div>
             `;
             container.appendChild(roomCard);
@@ -107,7 +107,8 @@ $rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
           id: button.getAttribute('data-id'),
           number: button.getAttribute('data-number'),
           name: button.getAttribute('data-name'),
-          capacity: button.getAttribute('data-capacity')
+          capacity: button.getAttribute('data-capacity'),
+          price: button.getAttribute('data-price')
         };
         sessionStorage.setItem('roomData', JSON.stringify(roomData));
         // Redirect to booking page or perform booking action
@@ -235,7 +236,7 @@ $rooms = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
       if (loggedIn === 'true') {
         // Redirect to the billing page with the room information
-        window.location.href = `../Billing/Billing.php?room_Type=${roomType}&room_price=${roomPrice}&room_number=${roomNumber}&room_capacity=${roomCapacity}`;
+        window.location.href = `../Billing/Billing.php?room_Type=${roomType}&room_price=${roomPrice}&room_number=${roomnumber}&room_name=${room_name}&room_capacity=${roomCapacity}`;
       }
     }
 

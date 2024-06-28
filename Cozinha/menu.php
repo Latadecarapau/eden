@@ -3,55 +3,48 @@ require '../db.php';
 session_start();
 
 $loggedIn = isset($_SESSION['username']);
-
-if (!$loggedIn) {
-    // Redirect to login with form data as query parameters
-    $query = http_build_query($_POST);
-    header("Location: login.php?$query");
+$user_email = $_SESSION['user_email'];
+if (!isset($_SESSION['user_email'])) {
+    header("Location: ../Login/login.php");
     exit();
 }
 
-// Fetch user details if logged in
-$user_id = $_SESSION['user_id']; // Assuming user ID is stored in session
-$user_query = $conn->prepare("SELECT firstname, lastname, email, telephone FROM users WHERE id = ?");
-$user_query->bind_param("i", $user_id);
-$user_query->execute();
-$user_result = $user_query->get_result();
-$user = $user_result->fetch_assoc();
+$stmt = $conn->prepare("SELECT firstname, lastname, telephone, email FROM users WHERE email = ?");
+$stmt->bind_param("s", $user_email);
+$stmt->execute();
+$result = $stmt->get_result();
 
-$nome_completo = $user['firstname'] . ' ' . $user['lastname'];
-$email = $user['email'];
-$numero_telefone = $user['telephone'];
-
+if ($result->num_rows == 0) {
+    echo "No user found with email " . htmlspecialchars($user_email);
+    exit();
+}
+$user_details = $result->fetch_assoc();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nome_completo = $_POST['name'] ?? null;
-    $email = $_POST['email'] ?? null;
-    $numero_telefone = $_POST['phone'] ?? null;
-    $numero_pessoas = $_POST['people'] ?? null;
-    $data = $_POST['date'] ?? null;
-    $hora = $_POST['time'] ?? null;
-    $preferencia_mesa = $_POST['table'] ?? null;
-    $pedido_especial = $_POST['message'] ?? null;
-
+    $nome_completo = $user_details['firstname'] . " " . $user_details['lastname'];
+    $email = $user_details['email'];
+    $numero_telefone = $user_details['telephone'];
+    $numero_pessoas = $_POST['people'] ?? '';
+    $data = $_POST['date'] ?? '';
+    $hora = $_POST['time'] ?? '';
+    $preferencia_mesa = $_POST['table'] ?? '';
+    $pedido_especial = $_POST['message'] ?? '';
 
     if ($nome_completo && $email && $numero_telefone && $numero_pessoas && $data && $hora && $preferencia_mesa && $pedido_especial) {
         $stmt = $conn->prepare("INSERT INTO reservation_restaurant (nome_completo, email, numero_telefone, numero_pessoas, data, hora, preferencia_mesa, pedido_especial) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssssss", $nome_completo, $email, $numero_telefone, $numero_pessoas, $data, $hora, $preferencia_mesa, $pedido_especial);
 
         if ($stmt->execute()) {
-            echo "New reservation created successfully";
+            echo "<script>showNotification('Your reservation was successfully made.');</script>";
+            echo "<script>setTimeout(function(){ window.location.reload(); }, 3000);</script>";
         } else {
-            echo "Error: " . $stmt->error;
+            $reservation_error = "Error: " . $stmt->error;
         }
-
         $stmt->close();
     } else {
-        echo "All fields are required.";
+        $reservation_error = "All fields are required.";
     }
 }
 $conn->close();
-
-
 ?>
 
 <!doctype html>
@@ -60,36 +53,23 @@ $conn->close();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>EdenDining</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="Cozinha.css" />
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <link href="css/bootstrap-icons.css" rel="stylesheet">
-
     <link href="css/tooplate-crispy-kitchen.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
-
-    <!--
-
-Tooplate 2129 Crispy Kitchen
-
-https://www.tooplate.com/view/2129-crispy-kitchen
-
--->
 </head>
 
 <body>
+<div class="notification" id="notification"></div>
 
     <nav class="navbar navbar-expand-lg bg-white shadow-lg">
         <div class="container">
@@ -97,336 +77,130 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <a class="navbar-brand" href="index.html">
-                EdenDining
-            </a>
-
-            <div class="d-lg-none">
-                <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#BookingModal">Reservation</button>
-            </div>
-
+            <a class="navbar-brand" href="index.html">EdenDining</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Home/Home.php">EdenHotel</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="Mainkitchen.php">Home</a>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">Sobre Nós</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../Home/Home.php">EdenHotel</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Mainkitchen.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.php">Sobre Nós</a></li>
                     <?php if ($loggedIn): ?>
-                        <li>
-                            <div class="user-profile">
-                                <div class="dropdown">
-                                    <button class="dropbtn">
-                                        <i class="ri-user-line"></i>
-                                        <span><?php echo $_SESSION['username']; ?></span>
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <a href="../Profile/Profile.php">Profile</a>
-                                        <a href="#">Settings</a>
-                                        <a href="../Logout/logout.php">Logout</a>
-                                    </div>
+                        <li class="nav-item user-profile">
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    <i class="ri-user-line"></i>
+                                    <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="../Profile/Profile.php">Profile</a>
+                                    <a href="#">Settings</a>
+                                    <a href="../Logout/logout.php">Logout</a>
                                 </div>
                             </div>
                         </li>
                     <?php else: ?>
-                        <li><a href="../Login/Login.php">Login</a></li>
-                        <li><a href="../Registar/Registar.php">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../Login/Login.php">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../Registar/Registar.php">Register</a></li>
                     <?php endif; ?>
-
                 </ul>
             </div>
-
             <div class="d-none d-lg-block">
                 <button type="button" class="custom-btn btn btn-danger" data-bs-toggle="modal"
                     data-bs-target="#BookingModal">Reservar Mesa</button>
             </div>
-
         </div>
     </nav>
-
     <main>
-
         <header class="site-header site-menu-header">
             <div class="container">
                 <div class="row">
-
                     <div class="col-lg-10 col-12 mx-auto">
                         <h1 class="text-white">Our Menus</h1>
-
                         <strong class="text-white">Perfect for all Breakfast, Lunch and Dinner</strong>
                     </div>
-
                 </div>
             </div>
-
             <div class="overlay"></div>
         </header>
 
+        <!-- Menu Section -->
         <section class="menu section-padding">
             <div class="container">
                 <div class="row">
-
                     <div class="col-12">
                         <h2 class="mb-lg-5 mb-4">Breakfast Menu</h2>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="menu-thumb">
-                            <img src="images/breakfast/brett-jordan-8xt8-HIFqc8-unsplash.jpg"
-                                class="img-fluid menu-image" alt="">
-
-                            <div class="menu-info d-flex flex-wrap align-items-center">
-                                <h4 class="mb-0">Fresh Start</h4>
-
-                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>24.50</span>
-
-                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
-                                    <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
-
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                    </div>
-
-                                    <p class="reviews-text mb-0 ms-4">128 Reviews</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="menu-thumb">
-                            <img src="images/breakfast/lucas-swennen-1W_MyJSRLuQ-unsplash.jpg"
-                                class="img-fluid menu-image" alt="">
-
-                            <div class="menu-info d-flex flex-wrap align-items-center">
-                                <h4 class="mb-0">Baked Creamy</h4>
-
-                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>16.50</span>
-
-                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
-                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
-
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                    </div>
-
-                                    <p class="reviews-text mb-0 ms-4">64 Reviews</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="menu-thumb">
-                            <img src="images/breakfast/louis-hansel-dphM2U1xq0U-unsplash.jpg"
-                                class="img-fluid menu-image" alt="">
-
-                            <div class="menu-info d-flex flex-wrap align-items-center">
-                                <h4 class="mb-0">Burger Set</h4>
-
-                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>24.50</span>
-
-                                <del class="ms-4"><small>$</small>36.50</del>
-
-                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
-                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
-
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                    </div>
-
-                                    <p class="reviews-text mb-0 ms-4">32 Reviews</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- Add your menu items here -->
                 </div>
             </div>
         </section>
 
-        <section class="menu section-padding bg-white">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-12">
-                        <h2 class="mb-lg-5 mb-4">Lunch Menu</h2>
+        <!-- Modal for Reservation -->
+        <div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="BookingModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="BookingModal">Reserva</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
-                    <div class="col-lg-6 col-12">
-                        <div class="menu-thumb">
-                            <img src="images/lunch/louis-hansel-cH5IPjaAYyo-unsplash.jpg" class="img-fluid menu-image"
-                                alt="">
-
-                            <div class="menu-info d-flex flex-wrap align-items-center">
-                                <h4 class="mb-0">Super Steak Set</h4>
-
-                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>32.75</span>
-
-                                <del class="ms-4"><small>$</small>55</del>
-
-                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
-                                    <h6 class="reviews-text mb-0 me-3">4.2/5</h6>
-
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                    </div>
-
-                                    <p class="reviews-text mb-0 ms-4">66 Reviews</p>
+                    <div class="modal-body d-flex flex-column justify-content-center">
+                        <?php if (isset($reservation_success)): ?>
+                            <div class="alert alert-success"><?php echo $reservation_success; ?></div>
+                        <?php elseif (isset($reservation_error)): ?>
+                            <div class="alert alert-danger"><?php echo $reservation_error; ?></div>
+                        <?php endif; ?>
+                        <div class="booking">
+                            <form action="menu.php" method="post" class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Nome Completo</label>
+                                    <input type="text" id="nome_completo" name="nome_completo" class="form-control"
+                                        value="<?php echo htmlspecialchars($user_details['firstname'] . ' ' . $user_details['lastname']); ?>"
+                                        readonly>
                                 </div>
-                            </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" id="email" name="email" class="form-control"
+                                        value="<?php echo htmlspecialchars($user_details['email']); ?>" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Telefone</label>
+                                    <input type="tel" id="numero_telefone" name="numero_telefone" class="form-control"
+                                        value="<?php echo htmlspecialchars($user_details['telephone']); ?>" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="people" class="form-label">Número de Pessoas</label>
+                                    <input type="number" class="form-control" id="people" name="people" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="date" class="form-label">Data</label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="time" class="form-label">Hora</label>
+                                    <input type="time" class="form-control" id="time" name="time" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="table" class="form-label">Preferência da Mesa</label>
+                                    <select class="form-select" id="table" name="table" required>
+                                        <option value="Mesa Junto À Janela">Mesa Junto À Janela</option>
+                                        <option value="Mesa Junto À Parede">Mesa Junto À Parede</option>
+                                        <option value="Mesa Junto À Entrada">Mesa Junto À Entrada</option>
+                                        <option value="Mesa na Esplanada">Mesa na Esplanada</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="message" class="form-label">Pedido Especial</label>
+                                    <textarea class="form-control" id="message" name="message" rows="3"
+                                        required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-danger">Reservar</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
-                    <div class="col-lg-6 col-12">
-                        <div class="menu-thumb">
-                            <img src="images/lunch/louis-hansel-rheOvfxOlOA-unsplash.jpg" class="img-fluid menu-image"
-                                alt="">
-
-                            <div class="menu-info d-flex flex-wrap align-items-center">
-                                <h4 class="mb-0">Bread &amp; Steak Set</h4>
-
-                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>42.50</span>
-
-                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
-                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
-
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                    </div>
-
-                                    <p class="reviews-text mb-0 ms-4">84 Reviews</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-        </section>
-
-        <section class="menu section-padding">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-12">
-                        <h2 class="mb-lg-5 mb-4">Dinner Menu</h2>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="menu-thumb">
-                            <img src="images/dinner/farhad-ibrahimzade-ZipYER3NLhY-unsplash.jpg"
-                                class="img-fluid menu-image" alt="">
-
-                            <div class="menu-info d-flex flex-wrap align-items-center">
-                                <h4 class="mb-0">Seafood Set</h4>
-
-                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>65.50</span>
-
-                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
-                                    <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
-
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                    </div>
-
-                                    <p class="reviews-text mb-0 ms-4">102 Reviews</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="menu-thumb">
-                            <img src="images/dinner/keriliwi-c3mFafsFz2w-unsplash.jpg" class="img-fluid menu-image"
-                                alt="">
-
-                            <div class="menu-info d-flex flex-wrap align-items-center">
-                                <h4 class="mb-0">Premium Steak</h4>
-
-                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>74.25</span>
-
-                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
-                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
-
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                    </div>
-
-                                    <p class="reviews-text mb-0 ms-4">56 Reviews</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="menu-thumb">
-                            <img src="images/dinner/farhad-ibrahimzade-isHUj3N0194-unsplash.jpg"
-                                class="img-fluid menu-image" alt="">
-
-                            <div class="menu-info d-flex flex-wrap align-items-center">
-                                <h4 class="mb-0">Salmon Set</h4>
-
-                                <span class="price-tag bg-white shadow-lg ms-4"><small>$</small>60</span>
-
-                                <div class="d-flex flex-wrap align-items-center w-100 mt-2">
-                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
-
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                    </div>
-
-                                    <p class="reviews-text mb-0 ms-4">76 Reviews</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
+        </div>
     </main>
 
     <footer class="site-footer section-padding">
@@ -466,9 +240,9 @@ https://www.tooplate.com/view/2129-crispy-kitchen
 
                         <li><a href="#" class="social-icon-link bi-instagram"></a></li>
 
-                        <<li><a href="#" target="_blank" class="social-icon-link bi-twitter"></a></li>
+                        <li><a href="#" target="_blank" class="social-icon-link bi-twitter"></a></li>
 
-                            <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+                        <li><a href="#" class="social-icon-link bi-youtube"></a></li>
                     </ul>
 
                     <p class="copyright-text tooplate-mt60">2023. Eden. All rights reserved.
@@ -483,85 +257,23 @@ https://www.tooplate.com/view/2129-crispy-kitchen
 
     </footer>
 
-    <!-- Modal -->
-    <div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="BookingModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="mb-0">Reserve a table</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex flex-column justify-content-center">
-                    <div class="booking">
-                        <form class="booking-form row" role="form" action="../Reservas/Reservas.php" method="post">
-                            <div class="col-lg-6 col-12">
-                                <label for="name" class="form-label">Nome Completo</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    value="<?php echo htmlspecialchars($nome_completo); ?>" required>
-                            </div>
-                            <div class="col-lg-6 col-12">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    value="<?php echo htmlspecialchars($nome_completo); ?>" required>
-                            </div>
-                            <div class="col-lg-6 col-12">
-                                <label for="phone" class="form-label">Número de telefone</label>
-                                <input type="text" class="form-control" id="phone" name="phone"
-                                    value="<?php echo htmlspecialchars($numero_telefone); ?>" required>
-                            </div>
-                            <div class="col-lg-6 col-12">
-                                <label for="people" class="form-label">Número de pessoas</label>
-                                <input type="text" name="people" id="people" class="form-control"
-                                    placeholder="12 Pessoas"
-                                    value="<?php echo htmlspecialchars($_GET['people'] ?? ''); ?>">
-                            </div>
-                            <div class="col-lg-6 col-12">
-                                <label for="date" class="form-label">Data</label>
-                                <input type="date" name="date" id="date"
-                                    value="<?php echo htmlspecialchars($_GET['date'] ?? ''); ?>" class="form-control">
-                            </div>
-                            <div class="col-lg-6 col-12">
-                                <label for="time" class="form-label">Horas a reservar</label>
-                                <select class="form-select form-control" name="time" id="time">
-                                    <option value="09:00:00" <?php echo (($_GET['time'] ?? '') == '09:00:00') ? 'selected' : ''; ?>>9:00 AM</option>
-                                    <option value="10:00:00" <?php echo (($_GET['time'] ?? '') == '10:00:00') ? 'selected' : ''; ?>>10:00 AM</option>
-                                    <option value="11:00:00" <?php echo (($_GET['time'] ?? '') == '11:00:00') ? 'selected' : ''; ?>>11:00 AM</option>
-                                    <option value="12:00:00" <?php echo (($_GET['time'] ?? '') == '12:00:00') ? 'selected' : ''; ?>>12:00 PM</option>
-                                    <option value="13:00:00" <?php echo (($_GET['time'] ?? '') == '13:00:00') ? 'selected' : ''; ?>>1:00 PM</option>
-                                    <option value="14:00:00" <?php echo (($_GET['time'] ?? '') == '14:00:00') ? 'selected' : ''; ?>>2:00 PM</option>
-                                    <option value="15:00:00" <?php echo (($_GET['time'] ?? '') == '15:00:00') ? 'selected' : ''; ?>>3:00 PM</option>
-                                    <option value="16:00:00" <?php echo (($_GET['time'] ?? '') == '16:00:00') ? 'selected' : ''; ?>>4:00 PM</option>
-                                    <option value="17:00:00" <?php echo (($_GET['time'] ?? '') == '17:00:00') ? 'selected' : ''; ?>>5:00 PM</option>
-                                    <option value="18:00:00" <?php echo (($_GET['time'] ?? '') == '18:00:00') ? 'selected' : ''; ?>>6:00 PM</option>
-                                    <option value="19:00:00" <?php echo (($_GET['time'] ?? '') == '19:00:00') ? 'selected' : ''; ?>>7:00 PM</option>
-                                    <option value="20:00:00" <?php echo (($_GET['time'] ?? '') == '20:00:00') ? 'selected' : ''; ?>>8:00 PM</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <label for="table" class="form-label">Preferência de mesa</label>
-                                <input type="text" name="table" id="table" class="form-control" placeholder=""
-                                    value="<?php echo htmlspecialchars($_GET['table'] ?? ''); ?>">
-                            </div>
-                            <div class="col-12">
-                                <label for="message" class="form-label">Mensagem adicional</label>
-                                <textarea class="form-control" rows="4" id="message" name="message"
-                                    placeholder="Mensagem Adicional"><?php echo htmlspecialchars($_GET['message'] ?? ''); ?></textarea>
-                            </div>
-                            <div class="col-lg-4 col-12 ms-auto">
-                                <button type="submit" class="form-control">Enviar Reservas</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer"></div>
-            </div>
-        </div>
-    </div>
     <!-- JAVASCRIPT FILES -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/custom.js"></script>
-
+    <script src="js/tooplate-script.js"></script>
+    <script>
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerText = message;
+            document.body.appendChild(notification);
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+                document.body.removeChild(notification);
+            }, 3000);
+        }
+    </script>
 </body>
 
 </html>

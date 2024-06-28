@@ -7,7 +7,6 @@ require '../db.php';
 $email = '';
 if ($loggedIn) {
     $username = $_SESSION['username'];
-    // Get user's email from the users table
     $sql = "SELECT email FROM users WHERE userName = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
@@ -20,7 +19,7 @@ if ($loggedIn) {
 // Fetch reservations for the logged-in user
 $reservations = [];
 if ($email) {
-    $sql = "SELECT id_reservation, name, email, telephone, type_of_room, room_number,check_in, check_out, num_guests, created_at FROM reservations WHERE email = ?";
+    $sql = "SELECT id_reservation, name, email, telephone, type_of_room, room_number, check_in, check_out, num_guests, created_at FROM reservations WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -33,7 +32,7 @@ if ($email) {
 
 $reservationrestaurant = [];
 if ($email) {
-    $sql = "SELECT 	id_restaurant, nome_completo, email, numero_telefone, numero_pessoas, data, hora, preferencia_mesa, pedido_especial FROM reservation_restaurant WHERE email = ?";
+    $sql = "SELECT id_restaurant, nome_completo, email, numero_telefone, numero_pessoas, data, hora, preferencia_mesa, pedido_especial FROM reservation_restaurant WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -45,19 +44,40 @@ if ($email) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id_reservation = $_POST['id_reservation'];
-    $sql = "SELECT created_at FROM reservations WHERE id_reservation = ?";
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        echo "Error preparing statement: " . $conn->error;
+    if (isset($_POST['id_restaurant'])) {
+        $id_restaurant = $_POST['id_restaurant'];
+        $sql = "DELETE FROM reservation_restaurant WHERE id_restaurant=?";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to prepare statement: ' . $conn->error]);
+            exit;
+        }
+        $stmt->bind_param("i", $id_restaurant);
+        $stmt->execute();
+        $stmt->close();
+
+        echo json_encode(['status' => 'success', 'message' => 'Your restaurant reservation was successfully canceled.']);
         exit;
     }
+}
 
-    $stmt->bind_param("i", $id_reservation);
-    $stmt->execute();
-    $stmt->bind_result($created_at);
-    $stmt->fetch();
-    $stmt->close();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['id_reservation'])) {
+        $id_reservation = $_POST['id_reservation'];
+        $sql = "DELETE FROM reservations WHERE id_reservation=?";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to prepare statement: ' . $conn->error]);
+            exit;
+        }
+        $stmt->bind_param("i", $id_reservation);
+        $stmt->execute();
+        $stmt->close();
+
+        echo json_encode(['status' => 'success', 'message' => 'Your reservation was successfully canceled.']);
+        exit;
+    }
 
     if ($created_at) {
         $createdAt = new DateTime($created_at);
@@ -86,11 +106,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo "Reserva não foi encontrada.";
     }
+
 }
+
 
 $conn->close();
 ?>
-
 <html>
 
 <head>
@@ -103,6 +124,7 @@ $conn->close();
 </head>
 
 <body>
+    <div class="notification" id="notification"></div>
     <header class="header">
         <nav>
             <div class="nav__bar">
@@ -152,6 +174,7 @@ $conn->close();
                 <thead>
                     <tr>
                         <th>Reserva ID</th>
+                        <th>Data de Criação</th>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Telefone</th>
@@ -175,6 +198,7 @@ $conn->close();
                             ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($reservation['id_reservation']); ?></td>
+                                <td><?php echo htmlspecialchars($reservation['created_at']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['name']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['email']); ?></td>
                                 <td><?php echo htmlspecialchars($reservation['telephone']); ?></td>
@@ -204,7 +228,7 @@ $conn->close();
             <table class="reservations-table">
                 <thead>
                     <tr>
-                        <th>Reserva ID</th>
+                        <th>Reserva de mesa id</th>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Telefone</th>
@@ -231,7 +255,7 @@ $conn->close();
                                 <td><?php echo htmlspecialchars($reservation['pedido_especial']); ?></td>
                                 <td>
                                     <button class="cancel-btn"
-                                        onclick="showModal(<?php echo $reservation['id_restaurant']; ?>)">Cancel</button>
+                                        onclick="showRestaurantModal(<?php echo $reservation['id_restaurant']; ?>)">Cancel</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -255,6 +279,74 @@ $conn->close();
             <button class="confirm-btn" onclick="confirmCancellation()">Confirm</button>
         </div>
     </div>
+    <div id="restaurant-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideRestaurantModal()">&times;</span>
+            <h2>Cancelar Reserva de Restaurante</h2>
+            <form id="cancel-restaurant-form" method="POST" action="Reservas.php">
+                <label for="id_restaurant">Digite seu id de reserva:</label>
+                <input type="text" id="id_restaurant" name="id_restaurant" required>
+                <button class="confirm-btn" type="submit">Confirm</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cancelRestaurantForm = document.getElementById('cancel-restaurant-form');
+
+            cancelRestaurantForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(cancelRestaurantForm);
+
+                fetch('Reservas.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        showNotification(data.message);
+                        if (data.status === 'success') {
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 3000);
+                        }
+                        hideRestaurantModal();  // Close the modal
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.style.display = 'block';
+            notification.style.position = 'fixed';  // Position fixed
+            notification.style.top = '20px';       // Top position
+            notification.style.left = '50%';       // Center horizontally
+            notification.style.transform = 'translateX(-50%)';  // Adjust center alignment
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function showRestaurantModal(id) {
+            document.getElementById('id_restaurant').value = id;
+            document.getElementById('restaurant-modal').style.display = 'block';
+        }
+
+        function hideRestaurantModal() {
+            document.getElementById('restaurant-modal').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('restaurant-modal')) {
+                hideRestaurantModal();
+            }
+        }
+    </script>
 
     <footer class="footer" id="contact">
         <div class="section__container footer__container">
