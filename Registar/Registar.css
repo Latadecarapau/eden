@@ -22,7 +22,7 @@ body {
   color: #000000;
 }
 .a:hover {
-  color: #f49e09;
+  color: #d819b2;
 }
 .container {
   max-width: 700px;
@@ -43,7 +43,7 @@ body {
   bottom: 0;
   height: 3px;
   width: 30px;
-  background: #f49e09;
+  background: #d819b2;
 }
 .container form .user-details {
   display: flex;
@@ -73,7 +73,7 @@ form .user-details .input-box {
 }
 .user-details .input-box input:focus,
 .user-details .input-box input:valid {
-  border-color: #f49e09;
+  border-color: #d819b2;
 }
 form .gender-details .gender-title {
   font-size: 20px;
@@ -101,7 +101,7 @@ form .gender-details .category label {
 #dot-1:checked ~ .category label .one,
 #dot-2:checked ~ .category label .two,
 #dot-3:checked ~ .category label .three {
-  border-color: #d3561d;
+  border-color: #d819b2;
   background: #ccc;
 }
 form input[type="radio"] {
@@ -115,7 +115,7 @@ form .button input {
   height: 100%;
   width: 100%;
   outline: none;
-  color: #f49e09;
+  color: #d819b2;
   background: #000000;
   border: none;
   font-size: 18px;

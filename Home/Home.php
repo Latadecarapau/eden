@@ -257,29 +257,27 @@ $total_rooms = $result_rooms->fetch_assoc()['total_rooms'];
           <a href="#home"><img src="assetshome/logo.png" alt="logo" /></a>
         </div>
         <p class="section__description">
-          Discover a world of comfort, luxury, and adventure as you explore
-          our curated selection of hotels, making every moment of your getaway
-          truly extraordinary.
+         Descubra seu Hotel de sonho e paradisiaco aqui
+         com EdenHotel
         </p>
         <a href="../Contactos/ContactForm.php"><button class="btn">CONTACT-NOS</button></a>
       </div>
       <div class="footer__col">
         <h4>QUICK LINKS</h4>
         <ul class="footer__links">
-          <li><a href="#">Browse Destinations</a></li>
-          <li><a href="#">Special Offers & Packages</a></li>
-          <li><a href="#">Room Types & Amenities</a></li>
-          <li><a href="#">Customer Reviews & Ratings</a></li>
-          <li><a href="#">Travel Tips & Guides</a></li>
+          <li><a href="../Cozinha/menu.php">Cozinha e Ménus</a></li>
+          <li><a href="../Services/Services.php">Ofertas especiais e pacotes</a></li>
+          <li><a href="../Quartos/Quartos.PHP">Tipos de Quartos e reservas</a></li>
+          <li><a href="#">Sobre Nós</a></li>
         </ul>
       </div>
       <div class="footer__col">
-        <h4>OUR SERVICES</h4>
+        <h4>Os nossos Serviços</h4>
         <ul class="footer__links">
-          <li><a href="#">Concierge Assistance</a></li>
-          <li><a href="#">Flexible Booking Options</a></li>
-          <li><a href="#">Airport Transfers</a></li>
-          <li><a href="#">Wellness & Recreation</a></li>
+          <li><a href="#">Assistencia Rapida</a></li>
+          <li><a href="#">Opções e booking Flexiveis</a></li>
+          <li><a href="#">Tour Guides amplas</a></li>
+          <li><a href="#">Comida local e nacional</a></li>
         </ul>
       </div>
       <div class="footer__col">

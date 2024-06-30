@@ -11,7 +11,7 @@ require '../db.php';
 // verificar se o form está submitido e preenchido
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        // Retrieve form data
+        // Buscar a data do form via post
         $firstname = $_POST["firstname"];
         $lastname = $_POST["lastname"];
         $username = $_POST["username"];
@@ -23,9 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $phone_area = $_POST["phone_area"];
 
 
-        // Insert na database
+        // Inserir na database
         $sql = "INSERT INTO users (firstname, lastname, username, email, phone_area, telephone, password, gender) 
-                VALUES ('$firstname', '$lastname', '$username', '$email','$phone_area','$telephone', '$password', '$gender')";
+                VALUES ('$firstname', '$lastname', '$username', '$email','$phone_area','$telephone', '$password',
+                 '$gender')";
 
         if ($conn->query($sql) === TRUE) {
             header("Location: ../login/Login.php");

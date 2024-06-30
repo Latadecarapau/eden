@@ -109,7 +109,7 @@ $conn->close();
                         <label for="password">Password</label>
                     </div>
                     <div class="forget">
-                        <label for=""><input type="checkbox"> Lembre-se | <a href="#">Esqueceu-se da
+                        <label for=""><input type="checkbox"> Lembre-se | <a href="../RecoverPassword/PasswordForm.php">Esqueceu-se da
                                 Password?</a></label>
                     </div>
                     <button type="submit">Log in</button>

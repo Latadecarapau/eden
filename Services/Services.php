@@ -1,6 +1,9 @@
 <?php
 session_start();
 $loggedIn = isset($_SESSION['username']);
+require '../db.php';
+$sql = "SELECT id_package, package_name, price, images, description FROM packages";
+$result = $conn->query($sql);
 ?>
 
 <html lang="en">
@@ -10,10 +13,7 @@ $loggedIn = isset($_SESSION['username']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="Services.css" />
-    <title>services</title>
-
-
-    
+    <title>Services</title>
 </head>
 
 <body>
@@ -33,9 +33,6 @@ $loggedIn = isset($_SESSION['username']);
                 <li><a href="../Quartos/Quartos.php">Quartos</a></li>
                 <li><a href="../Home/explore">Explore</a></li>
                 <li><a href="../Contactos/ContactForm.php">Contact-nos</a></li>
-                
-                
-
                 <?php if ($loggedIn): ?>
                     <li>
                         <div class="user-profile">
@@ -61,121 +58,80 @@ $loggedIn = isset($_SESSION['username']);
         </nav>
     </header>
     <section class="section__container service__container">
-    <p class="section__subheader">Pacotes para todos</p>
-    <h2 class="section__header">Compre seu pacote agora.</h2>
+        <p class="section__subheader">Pacotes para todos</p>
+        <h2 class="section__header">Compre seu pacote agora.</h2>
 
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <input type="text" id="search-input" placeholder="Pesquise Pacotes..." />
-        <button class="btn" id="search-btn">Procurar</button>
-    </div>
-
-    <div class="service__grid">
-        <div class="service__card">
-            <div class="service__card__image">
-                <img src="assetsservice/service-1.jpg" alt="Pacote tour" />
-                <div class="service__card__icons">
-                    <span><i class="ri-heart-fill"></i></span>
-                    <span><i class="ri-paint-fill"></i></span>
-                    <span><i class="ri-shield-star-line"></i></span>
-                </div>
-            </div>
-            <div class="service__card__details">
-                <h4>Pacote tour</h4>
-                <p>Bask in luxury with breathtaking ocean views from your private suite.</p>
-                <h5>Starting from <span>$299/night</span></h5>
-                
-                    <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
-               
-            </div>
+        <div class="service__grid">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<div class='service__card'>";
+                    echo "<div class='service__card__image'>";
+                    if ($row["images"]) {
+                        $imageData = base64_encode($row["images"]);
+                        echo "<img src='data:image/jpeg;base64," . $imageData . "' alt='" . $row["package_name"] . "' />";
+                    }
+                    echo "<div class='service__card__icons'>";
+                    echo "<span><i class='ri-heart-fill'></i></span>";
+                    echo "<span><i class='ri-paint-fill'></i></span>";
+                    echo "<span><i class='ri-shield-star-line'></i></span>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class='service__card__details'>";
+                    echo "<h4>" . $row["package_name"] . "</h4>";
+                    echo "<p>" . $row["description"] . "</p>";
+                    echo "<h5>Starting from <span>$" . $row["price"] . "</span></h5>";
+                    echo "<button class='btn book-now' data-id='" . $row["id_package"] . "' data-name='" . $row["package_name"] . "' data-price='" . $row["price"] . "' data-description='" . $row["description"] . "' data-logged-in='" . ($loggedIn ? 'true' : 'false') . "'>Book Now</button>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+            } else {
+                echo "No packages available.";
+            }
+            $conn->close();
+            ?>
         </div>
-        <div class="service__card">
-            <div class="service__card__image">
-                <img src="assetsservice/service-2.jpg" alt="Executive Cityscape service" />
-                <div class="service__card__icons">
-                    <span><i class="ri-heart-fill"></i></span>
-                    <span><i class="ri-paint-fill"></i></span>
-                    <span><i class="ri-shield-star-line"></i></span>
-                </div>
-            </div>
-            <div class="service__card__details">
-                <h4>Executive Cityscape service</h4>
-                <p>Experience urban elegance and modern comfort in the heart of the city.</p>
-                <h5>Starting from <span>$199/night</span></h5>
-               
-                    <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">Book Now</button>
-              
-            </div>
-        </div>
-        <div class="service__card">
-            <div class="service__card__image">
-                <img src="assetsservice/service-3.jpg" alt="Family Garden Retreat" />
-                <div class="service__card__icons">
-                    <span><i class="ri-heart-fill"></i></span>
-                    <span><i class="ri-paint-fill"></i></span>
-                    <span><i class="ri-shield-star-line"></i></span>
-                </div>
-            </div>
-            <div class="service__card__details">
-                <h4>Family Garden Retreat</h4>
-                <p>Spacious and inviting, perfect for creating cherished memories with loved ones.</p>
-                <h5>Starting from <span>$249/night</span></h5>
-               
-                    <button class="btn book-now" data-logged-in="<?php echo $loggedIn ? 'true' : 'false'; ?>">buy Now</button>
-               
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- partial -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js'></script>
-    <script src="Services.js"></script>
-
+    </section>
     <footer class="footer" id="contact">
         <div class="section__container footer__container">
             <div class="footer__col">
                 <div class="logo">
-                    <a href="#home"><img src="assetservice/logo.png" alt="logo" /></a>
+                    <a href="#home"><img src="assetshome/logo.png" alt="logo" /></a>
                 </div>
                 <p class="section__description">
-                    Discover a world of comfort, luxury, and adventure as you explore
-                    our curated selection of hotels, making every moment of your getaway
-                    truly extraordinary.
+                    Descubra seu Hotel de sonho e paradisiaco aqui
+                    com EdenHotel
                 </p>
-                <button class="btn">Book Now</button>
+                <a href="../Contactos/ContactForm.php"><button class="btn">CONTACT-NOS</button></a>
             </div>
             <div class="footer__col">
                 <h4>QUICK LINKS</h4>
                 <ul class="footer__links">
-                    <li><a href="#">Browse Destinations</a></li>
-                    <li><a href="#">Special Offers & Packages</a></li>
-                    <li><a href="#">service Types & Amenities</a></li>
-                    <li><a href="#">Customer Reviews & Ratings</a></li>
-                    <li><a href="#">Travel Tips & Guides</a></li>
+                    <li><a href="../Cozinha/menu.php">Cozinha e Ménus</a></li>
+                    <li><a href="../Services/Services.php">Ofertas especiais e pacotes</a></li>
+                    <li><a href="../Quartos/Quartos.PHP">Tipos de Quartos e reservas</a></li>
+                    <li><a href="#">Sobre Nós</a></li>
                 </ul>
             </div>
             <div class="footer__col">
-                <h4>OUR SERVICES</h4>
+                <h4>Os nossos Serviços</h4>
                 <ul class="footer__links">
-                    <li><a href="#">Concierge Assistance</a></li>
-                    <li><a href="#">Flexible Booking Options</a></li>
-                    <li><a href="#">Airport Transfers</a></li>
-                    <li><a href="#">Wellness & Recreation</a></li>
-                    <li><a href="#">Tour Guides & Extra Packages</a></li>
+                    <li><a href="#">Assistencia Rapida</a></li>
+                    <li><a href="#">Opções e booking Flexiveis</a></li>
+                    <li><a href="#">Tour Guides amplas</a></li>
+                    <li><a href="#">Comida local e nacional</a></li>
                 </ul>
             </div>
             <div class="footer__col">
-                <h4>CONTACT US</h4>
+                <h4>NOSSO EMAIL</h4>
                 <ul class="footer__links">
-                    <li><a href="mailto:hoteleden2024kgm@gmail.com">hoteleden2024kgm@gmail.com</a></li>
+                    <li><a href="#">hoteleden2024kgm@gmail.com</a></li>
                 </ul>
                 <div class="footer__socials">
-                    <a href="#"><img src="assetservice/facebook.png" alt="facebook" /></a>
-                    <a href="#"><img src="assetservice/instagram.png" alt="instagram" /></a>
-                    <a href="#"><img src="assetservice/youtube.png" alt="youtube" /></a>
-                    <a href="#"><img src="assetservice/twitter.png" alt="twitter" /></a>
+                    <a href="#"><img src="assetshome/facebook.png" alt="facebook" /></a>
+                    <a href="#"><img src="assetshome/instagram.png" alt="instagram" /></a>
+                    <a href="#"><img src="assetshome/youtube.png" alt="youtube" /></a>
+                    <a href="#"><img src="assetshome/twitter.png" alt="twitter" /></a>
                 </div>
             </div>
         </div>
@@ -183,19 +139,29 @@ $loggedIn = isset($_SESSION['username']);
             Copyright © 2024 Latadecarapau. All rights reserved.
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const bookNowButtons = document.querySelectorAll('.book-now');
 
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <!-- JAVASCRIPT -->
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-
-    <!-- prismjs plugin -->
-    <script src="assets/libs/prismjs/prism.js"></script>
-
-    <!-- App js -->
-    <script src="assets/js/app.js"></script>
-
+            bookNowButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const loggedIn = button.getAttribute('data-logged-in') === 'true';
+                    if (loggedIn) {
+                        const packageData = {
+                            id: button.getAttribute('data-id'),
+                            name: button.getAttribute('data-name'),
+                            price: button.getAttribute('data-price'),
+                            description: button.getAttribute('data-description')
+                        };
+                        sessionStorage.setItem('packageData', JSON.stringify(packageData));
+                        window.location.href = '../Billing/PacoteBilling.php';
+                    } else {
+                        window.location.href = '../Login/Login.php';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
