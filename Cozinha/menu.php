@@ -114,8 +114,8 @@ $conn->close();
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 col-12 mx-auto">
-                        <h1 class="text-white">Our Menus</h1>
-                        <strong class="text-white">Perfect for all Breakfast, Lunch and Dinner</strong>
+                        <h1 class="text-white">O que está no menu?</h1>
+                        <strong class="text-white">Explore o seu paladar ao longo do dia</strong>
                     </div>
                 </div>
             </div>
@@ -124,15 +124,262 @@ $conn->close();
 
         <!-- Menu Section -->
         <section class="menu section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="mb-lg-5 mb-4">Breakfast Menu</h2>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h2 class="mb-lg-5 mb-4">Pequeno Almoço</h2>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="menu-thumb">
+                                <img src="images/breakfast/brett-jordan-8xt8-HIFqc8-unsplash.jpg" class="img-fluid menu-image" alt="">
+
+                                <div class="menu-info d-flex flex-wrap align-items-center">
+                                    <h4 class="mb-0">Um Bom Começo</h4>
+                                    <p class="reviews-text mb-0">Consiste em dois pães torrados com salmão fumado, queijo mozarela, ovo mexido e majericão.</p>
+
+                                    <span class="price-tag bg-white shadow-lg mb-0"><small>$</small>9,50€</span>
+
+                                    <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                        <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+
+                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="menu-thumb">
+                                <img src="images/breakfast/lucas-swennen-1W_MyJSRLuQ-unsplash.jpg" class="img-fluid menu-image" alt="">
+
+                                <div class="menu-info d-flex flex-wrap align-items-center">
+                                    <h4 class="mb-0">Panquecas Cremosas</h4>
+                                    <p class="reviews-text mb-0">Prato servido de 4 panquecas, acompanhadas de amêndoa e avelã, cobertas com o nosso topping de doce de leite e com côco ralado.</p>
+                            
+
+                                    <span class="price-tag bg-white shadow-lg mb-0"><small>€</small>11.50</span>
+
+                                    <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                        <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+
+                                        <p class="reviews-text mb-0 ms-4">64 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="menu-thumb">
+                                <img src="images/breakfast/louis-hansel-dphM2U1xq0U-unsplash.jpg" class="img-fluid menu-image" alt="">
+
+                                <div class="menu-info d-flex flex-wrap align-items-center">
+                                    <h4 class="mb-0">Inicial Burguer</h4>
+                                    <p class="reviews-text mb-0"> Hamburguer simples, constituido por um pão de sementes de centeio, alface, tomate e pepino. O hamburguer pode ser vegetariano ou de carne de vaca/frango.</p>
+
+                                    <span class="price-tag bg-white shadow-lg mb-0"><small>€</small>12.50</span>
+
+                            
+
+                                    <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                        <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+
+                                        <p class="reviews-text mb-0 ms-4">32 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <!-- Add your menu items here -->
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <section class="menu section-padding bg-white">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h2 class="mb-lg-5 mb-4">Pratos Típicos</h2>
+                          
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="menu-thumb">
+                                <img src="assetservice/sardi.png" class="img-fluid menu-image" alt="">
+
+                                <div class="menu-info d-flex flex-wrap align-items-center">
+                                    <h4 class="mb-0">Sardinhas da Terra</h4>
+                                    <p class="reviews-text mb-0"> Uma dose de sardinhas grelhadas na brasa, acompanhadas de salada e batata cozida</p>
+
+                                    <span class="price-tag bg-white shadow-lg mb-0"><small>€</small>19,99</span>
+
+                                   
+
+                                    <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                        <h6 class="reviews-text mb-0 me-3">4.2/5</h6>
+
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+
+                                        <p class="reviews-text mb-0 ms-4">66 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="menu-thumb">
+                                <img src="assetservice/cast.png" class="img-fluid menu-image" alt="">
+
+                                <div class="menu-info d-flex flex-wrap align-items-center">
+                                    <h4 class="mb-0">Estufado de Castanha com Grão de Bico Vegetariano</h4>
+                                    <p class="reviews-text mb-0"> Prato constituido por alho francês, abóbora, tomate, castanhas assadas e o grão-de-bico</p>
+
+                                    <span class="price-tag bg-white shadow-lg mb-0"><small>€</small>15,99</span>
+
+                                    <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                        <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+
+                                        <p class="reviews-text mb-0 ms-4">84 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="menu section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h2 class="mb-lg-5 mb-4">Outras Refeições</h2>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="menu-thumb">
+                                <img src="assetservice/bito.png" class="img-fluid menu-image" alt="">
+
+                                <div class="menu-info d-flex flex-wrap align-items-center">
+                                    <h4 class="mb-0">O Bitoque</h4>
+                                    <p class="reviews-text mb-0"> Carne grelhada acompanhada de arroz simples, batata frita, ovo estrelado e salada. A carne pode ser de vaca, de porco ou de frango.</p>
+
+                                    <span class="price-tag bg-white shadow-lg mb-0"><small>€</small>15,99</span>
+
+                                    <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                        <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+
+                                        <p class="reviews-text mb-0 ms-4">102 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="menu-thumb">
+                                <img src="assetservice/mari.png" class="img-fluid menu-image" alt="">
+
+                                <div class="menu-info d-flex flex-wrap align-items-center">
+                                    <h4 class="mb-0">Cataplana do Pescador</h4>
+                                    <p class="reviews-text mb-0 ms-4"> dkkad</p>
+
+                                    <span class="price-tag bg-white shadow-lg mb-0"><small>$</small>74.25</span>
+
+                                    <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                        <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+
+                                        <p class="reviews-text mb-0 ms-4">56 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="menu-thumb">
+                                <img src="images/dinner/farhad-ibrahimzade-isHUj3N0194-unsplash.jpg" class="img-fluid menu-image" alt="">
+
+                                <div class="menu-info d-flex flex-wrap align-items-center">
+                                    <h4 class="mb-0">Salmon Set</h4>
+                                    <p class="reviews-text mb-0 ms-4"> dkkad</p>
+
+                                    <span class="price-tag bg-white shadow-lg mb-0"><small>$</small>60</span>
+
+                                    <div class="d-flex flex-wrap align-items-center w-100 mt-2">
+                                        <h6 class="reviews-text mb-0 me-3">3/5</h6>
+
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+
+                                        <p class="reviews-text mb-0 ms-4">76 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
 
         <!-- Modal for Reservation -->
         <div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="BookingModal" aria-hidden="true">
