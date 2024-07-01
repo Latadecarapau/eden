@@ -240,11 +240,11 @@ $total_rooms = $result_rooms->fetch_assoc()['total_rooms'];
 
   <section class="explore" id="explore">
     <p class="section__subheader">EXPLORE</p>
-    <h2 class="section__header">Melhor cozinhados da Margem.</h2>
+    <h2 class="section__header">Conhece os sabores de EdenHotel</h2>
     <div class="explore__bg">
       <div class="explore__content">
         <p class="section__description" id="current-date-time"></p>
-        <h4>Novo menu todos os dias no Eden Hotel.</h4>
+        <h4>Dê uma olhadela na nossa ementa</h4>
         <a href="../Cozinha/menu.php"><button class="btn">Ver Menus</button></a>
       </div>
     </div>

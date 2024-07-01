@@ -503,9 +503,9 @@ $conn->close();
 
                     <p class="mb-2">Segunda - Domingo</p>
 
-                    <p>9:00 AM - 22:00 PM</p>
+                    <p>9:00h - 22:00h</p>
 
-                    <p>Tel: <a href="tel: 010-02-0340" class="tel-link">010-02-0340</a></p>
+                    <p>Tel: <a href="tel: 010-02-0340" class="tel-link">21 319 2815</a></p>
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-xs-12 tooplate-mt30">
@@ -521,7 +521,7 @@ $conn->close();
                         <li><a href="#" class="social-icon-link bi-youtube"></a></li>
                     </ul>
 
-                    <p class="copyright-text tooplate-mt60">2023. Eden. All rights reserved.
+                    <p class="copyright-text tooplate-mt60">2023.ONossoEden
                         <br>Design: <a rel="nofollow" href="https://www.tooplate.com/" target="_blank">Tooplate</a>
                     </p>
 
