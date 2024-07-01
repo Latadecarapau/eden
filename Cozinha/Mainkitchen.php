@@ -156,11 +156,11 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                     <div class="col-lg-5 col-12 m-auto">
                         <div class="heroText">
 
-                            <h1 class="text-white mb-lg-5 mb-3">Bife Delicioso</h1>
+                            <h1 class="text-white mb-lg-5 mb-3">Sardinha da Terra</h1>
 
                             <div class="c-reviews my-3 d-flex flex-wrap align-items-center">
                                 <div class="d-flex flex-wrap align-items-center">
-                                    <h4 class="text-white mb-0 me-3">4.4/5</h4>
+                                    <h4 class="text-white mb-0 me-3">4.7/5</h4>
 
                                     <div class="reviews-stars">
                                         <i class="bi-star-fill reviews-icon"></i>
@@ -171,7 +171,7 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                                     </div>
                                 </div>
 
-                                <p class="text-white w-100">De <strong>1,206+</strong> Avaliações</p>
+                                <p class="text-white w-100">De <strong>400+</strong> Avaliações</p>
                             </div>
                         </div>
                     </div>
@@ -203,13 +203,13 @@ https://www.tooplate.com/view/2129-crispy-kitchen
 
                                     <div class="carousel-caption">
                                         <div class="d-flex align-items-center">
-                                            <h4 class="hero-text">Bife</h4>
+                                            <h4 class="hero-text">Bitoque</h4>
 
-                                            <span class="price-tag ms-4"><small>€</small>26.50</span>
+                                            <span class="price-tag ms-4"><small>€</small>15.99</span>
                                         </div>
 
                                         <div class="d-flex flex-wrap align-items-center">
-                                            <h5 class="reviews-text mb-0 me-3">3.8/5</h5>
+                                            <h5 class="reviews-text mb-0 me-3">4.4/5</h5>
 
                                             <div class="reviews-stars">
                                                 <i class="bi-star-fill reviews-icon"></i>
@@ -230,13 +230,13 @@ https://www.tooplate.com/view/2129-crispy-kitchen
 
                                     <div class="carousel-caption">
                                         <div class="d-flex align-items-center">
-                                            <h4 class="hero-text">Sausage Pasta</h4>
+                                            <h4 class="hero-text">Cataplana do Pescador</h4>
 
-                                            <span class="price-tag ms-4"><small>€</small>18.25</span>
+                                            <span class="price-tag ms-4"><small>€</small>35,99</span>
                                         </div>
 
                                         <div class="d-flex flex-wrap align-items-center">
-                                            <h5 class="reviews-text mb-0 me-3">4.2/5</h5>
+                                            <h5 class="reviews-text mb-0 me-3">4/5</h5>
 
                                             <div class="reviews-stars">
                                                 <i class="bi-star-fill reviews-icon"></i>
