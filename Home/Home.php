@@ -43,7 +43,7 @@ $total_rooms = $result_rooms->fetch_assoc()['total_rooms'];
         <li><a href="../AboutUs/About.php">Sobre Nós</a></li>
         <li><a href="../Services/Services.php">Pacotes</a></li>
         <li><a href="../Quartos/Quartos.php">Quartos</a></li>
-        <li><a href="#explore">Cozinha</a></li>
+        <li><a href="#explore">Restaurante</a></li>
         <li><a href="#contact">Contactos</a></li>
 
 
