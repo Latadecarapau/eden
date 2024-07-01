@@ -215,7 +215,7 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                                                 <i class="bi-star-fill reviews-icon"></i>
                                                 <i class="bi-star-fill reviews-icon"></i>
                                                 <i class="bi-star-fill reviews-icon"></i>
-                                                <i class="bi-star reviews-icon"></i>
+                                                <i class="bi-star-fill reviews-icon"></i>
                                                 <i class="bi-star reviews-icon"></i>
                                             </div>
                                         </div>

@@ -67,65 +67,76 @@ $conn->close();
     <link href="css/tooplate-crispy-kitchen.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
     <style>
-       body {
-    font-family: Arial, sans-serif;
-}
-.container {
-    width: 90%;
-    margin: auto;
-}
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -15px;
-}
-.col {
-    flex: 1 1 30%;
-    padding: 15px;
-    box-sizing: border-box;
-}
-.menu-thumb {
-    margin-bottom: 30px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-.menu-thumb img {
-    width: 100%;
-    height: auto;
-}
-.menu-info {
-    padding: 15px;
-}
-.price-tag {
-    font-size: 1.2em;
-    font-weight: bold;
-    background-color: #fff;
-    padding: 5px 10px;
-    border-radius: 3px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 0;
-}
-.reviews-text {
-    font-size: 1em;
-    margin: 0;
-}
-.reviews-stars {
-    display: flex;
-    margin-left: auto;
-}
-.reviews-stars .reviews-icon {
-    color: #FFD700;
-    margin-right: 2px;
-}
-.menu-info .details {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    justify-content: space-between;
-}
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -15px;
+        }
+
+        .col {
+            flex: 1 1 30%;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .menu-thumb {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-thumb img {
+            width: 100%;
+            height: auto;
+        }
+
+        .menu-info {
+            padding: 15px;
+        }
+
+        .price-tag {
+            font-size: 1.2em;
+            font-weight: bold;
+            background-color: #fff;
+            padding: 5px 10px;
+            border-radius: 3px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0;
+        }
+
+        .reviews-text {
+            font-size: 1em;
+            margin: 0;
+        }
+
+        .reviews-stars {
+            display: flex;
+            margin-left: auto;
+        }
+
+        .reviews-stars .reviews-icon {
+            color: #FFD700;
+            margin-right: 2px;
+        }
+
+        .menu-info .details {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            justify-content: space-between;
+        }
     </style>
 </head>
 
@@ -186,229 +197,489 @@ $conn->close();
 
         <!-- Menu Section -->
         <section class="menu section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="mb-lg-5 mb-4">Pequeno Almoço</h2>
-                </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-lg-5 mb-4">Pequeno Almoço</h2>
+                    </div>
 
-                <div class="col">
-                    <div class="menu-thumb">
-                        <img src="images/breakfast/brett-jordan-8xt8-HIFqc8-unsplash.jpg" class="img-fluid menu-image" alt="">
-                        <div class="menu-info">
-                            <h4 class="mb-0">Um Bom Começo</h4>
-                            <p class="reviews-text mb-2">Consiste em dois pães torrados com salmão fumado, queijo mozarela, ovo mexido e majericão.</p>
-                            <div class="details">
-                                <span class="price-tag"><small>€</small>9,50</span>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="images/breakfast/brett-jordan-8xt8-HIFqc8-unsplash.jpg"
+                                class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">Um Bom Começo</h4>
+                                <p class="reviews-text mb-2">Consiste em dois pães torrados com salmão fumado, queijo
+                                    mozarela, ovo mexido e majericão.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>9,50</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
                                     </div>
-                                    <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col">
-                    <div class="menu-thumb">
-                        <img src="images/breakfast/lucas-swennen-1W_MyJSRLuQ-unsplash.jpg" class="img-fluid menu-image" alt="">
-                        <div class="menu-info">
-                            <h4 class="mb-0">Panquecas Cremosas</h4>
-                            <p class="reviews-text mb-2">Prato servido de 4 panquecas, acompanhadas de amêndoa e avelã, cobertas com o nosso topping de doce de leite e com côco ralado.</p>
-                            <div class="details">
-                                <span class="price-tag"><small>€</small>11.50</span>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="images/breakfast/lucas-swennen-1W_MyJSRLuQ-unsplash.jpg"
+                                class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">Panquecas Cremosas</h4>
+                                <p class="reviews-text mb-2">Prato servido de 4 panquecas, acompanhadas de amêndoa e
+                                    avelã, cobertas com o nosso topping de doce de leite e com côco ralado.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>11.50</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">3/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">64 Avaliações</p>
                                     </div>
-                                    <p class="reviews-text mb-0 ms-4">64 Avaliações</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col">
-                    <div class="menu-thumb">
-                        <img src="images/breakfast/louis-hansel-dphM2U1xq0U-unsplash.jpg" class="img-fluid menu-image" alt="">
-                        <div class="menu-info">
-                            <h4 class="mb-0">Inicial Burguer</h4>
-                            <p class="reviews-text mb-2">Hamburguer simples, constituido por um pão de sementes de centeio, alface, tomate e pepino. O hamburguer pode ser vegetariano ou de carne de vaca/frango.</p>
-                            <div class="details">
-                                <span class="price-tag"><small>€</small>12.50</span>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="reviews-text mb-0 me-3">3/5</h6>
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="images/breakfast/louis-hansel-dphM2U1xq0U-unsplash.jpg"
+                                class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">Inicial Burguer</h4>
+                                <p class="reviews-text mb-2">Hamburguer simples, constituido por um pão de sementes de
+                                    centeio, alface, tomate e pepino. O hamburguer pode ser vegetariano ou de carne de
+                                    vaca/frango.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>12.50</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">3/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">32 Avaliações</p>
                                     </div>
-                                    <p class="reviews-text mb-0 ms-4">32 Avaliações</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="menu section-padding bg-white">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="mb-lg-5 mb-4">Pratos Típicos</h2>
-                </div>
+        <section class="menu section-padding bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-lg-5 mb-4">Pratos Típicos</h2>
+                    </div>
 
-                <div class="col">
-                    <div class="menu-thumb">
-                        <img src="assetservice/sardi.png" class="img-fluid menu-image" alt="">
-                        <div class="menu-info">
-                            <h4 class="mb-0">Sardinhas da Terra</h4>
-                            <p class="reviews-text mb-2">Uma dose de sardinhas grelhadas na brasa, acompanhadas de salada e batata cozida</p>
-                            <div class="details">
-                                <span class="price-tag"><small>€</small>19,99</span>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="reviews-text mb-0 me-3">4.7/5</h6>
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/sardi.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">Sardinhas da Terra</h4>
+                                <p class="reviews-text mb-2">Uma dose de sardinhas grelhadas na brasa, acompanhadas de
+                                    salada e batata cozida</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>19,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4.7/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">485 Avaliações</p>
                                     </div>
-                                    <p class="reviews-text mb-0 ms-4">485 Avaliações</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col">
-                    <div class="menu-thumb">
-                        <img src="assetservice/cast.png" class="img-fluid menu-image" alt="">
-                        <div class="menu-info">
-                            <h4 class="mb-0">Estufado de Castanha com Grão de Bico Vegetariano</h4>
-                            <p class="reviews-text mb-2">Prato constituido por alho francês, abóbora, tomate, castanhas assadas e o grão-de-bico</p>
-                            <div class="details">
-                                <span class="price-tag"><small>€</small>15,99</span>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="reviews-text mb-0 me-3">4/5</h6>
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/cast.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">Estufado de Castanha com Grão de Bico Vegetariano</h4>
+                                <p class="reviews-text mb-2">Prato constituido por alho francês, abóbora, tomate,
+                                    castanhas assadas e o grão-de-bico</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>15,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">204 Avaliações</p>
                                     </div>
-                                    <p class="reviews-text mb-0 ms-4">204 Avaliações</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="menu section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="mb-lg-5 mb-4">Outras Refeições</h2>
-                </div>
+        <section class="menu section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-lg-5 mb-4">Outras Refeições</h2>
+                    </div>
 
-                <div class="col">
-                    <div class="menu-thumb">
-                        <img src="assetservice/bito.png" class="img-fluid menu-image" alt="">
-                        <div class="menu-info">
-                            <h4 class="mb-0">O Bitoque</h4>
-                            <p class="reviews-text mb-2">Carne grelhada acompanhada de arroz simples, batata frita, ovo estrelado e salada. A carne pode ser de vaca, de porco ou de frango.</p>
-                            <div class="details">
-                                <span class="price-tag"><small>€</small>15,99</span>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/bito.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">O Bitoque</h4>
+                                <p class="reviews-text mb-2">Carne grelhada acompanhada de arroz simples, batata frita,
+                                    ovo estrelado e salada. A carne pode ser de vaca, de porco ou de frango.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>15,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">102 Avaliações</p>
                                     </div>
-                                    <p class="reviews-text mb-0 ms-4">102 Avaliações</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col">
-                    <div class="menu-thumb">
-                        <img src="assetservice/mari.png" class="img-fluid menu-image" alt="">
-                        <div class="menu-info">
-                            <h4 class="mb-0">Cataplana do Pescador</h4>
-                            <p class="reviews-text mb-2">Mexilhão fresco, berbigão fresco, camarão e ameijoa servidos numa cataplana acompanhado do nosso tempero.</p>
-                            <div class="details">
-                                <span class="price-tag"><small>€</small>35,99</span>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="reviews-text mb-0 me-3">4/5</h6>
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/mari.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">Cataplana do Pescador</h4>
+                                <p class="reviews-text mb-2">Mexilhão fresco, berbigão fresco, camarão e ameijoa
+                                    servidos numa cataplana acompanhado do nosso tempero.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>35,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">176 Avaliações</p>
                                     </div>
-                                    <p class="reviews-text mb-0 ms-4">176 Avaliações</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col">
-                    <div class="menu-thumb">
-                        <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
-                        <div class="menu-info">
-                            <h4 class="mb-0">O Banquete</h4>
-                            <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas, frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas, cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
-                            <div class="details">
-                                <span class="price-tag"><small>€</small>109,99</span>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
-                                    <div class="reviews-stars">
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star-fill reviews-icon"></i>
-                                        <i class="bi-star reviews-icon"></i>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">O Banquete</h4>
+                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
+                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
+                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>109,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
                                     </div>
-                                    <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <section class="menu section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-lg-5 mb-4">Outras Refeições</h2>
+                    </div>
+
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/bito.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">O Bitoque</h4>
+                                <p class="reviews-text mb-2">Carne grelhada acompanhada de arroz simples, batata frita,
+                                    ovo estrelado e salada. A carne pode ser de vaca, de porco ou de frango.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>15,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">102 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/mari.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">Cataplana do Pescador</h4>
+                                <p class="reviews-text mb-2">Mexilhão fresco, berbigão fresco, camarão e ameijoa
+                                    servidos numa cataplana acompanhado do nosso tempero.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>35,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">176 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">O Banquete</h4>
+                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
+                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
+                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>109,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section class="menu section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-lg-5 mb-4">Outras Refeições</h2>
+                    </div>
+
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/bito.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">O Bitoque</h4>
+                                <p class="reviews-text mb-2">Carne grelhada acompanhada de arroz simples, batata frita,
+                                    ovo estrelado e salada. A carne pode ser de vaca, de porco ou de frango.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>15,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">102 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/mari.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">Cataplana do Pescador</h4>
+                                <p class="reviews-text mb-2">Mexilhão fresco, berbigão fresco, camarão e ameijoa
+                                    servidos numa cataplana acompanhado do nosso tempero.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>35,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">176 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">O Banquete</h4>
+                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
+                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
+                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>109,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">O Banquete</h4>
+                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
+                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
+                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>109,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">O Banquete</h4>
+                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
+                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
+                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>109,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">O Banquete</h4>
+                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
+                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
+                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>109,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
         <!-- Modal for Reservation -->
         <div class="modal fade" id="BookingModal" tabindex="-1" aria-labelledby="BookingModal" aria-hidden="true">
