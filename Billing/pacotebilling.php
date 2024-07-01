@@ -26,23 +26,18 @@ $errorMessages = [
     'package_name' => '',
     'description' => '',
     'price' => '',
-    'check_in' => '',
     'check_out' => '',
-    'num_guests' => '',
-    'room_number' => ''
+    'check_in' => '',
+    'num_guests' => ''
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $user_details['firstname'] . " " . $user_details['lastname'];
     $email = $user_details['email'];
     $telephone = $user_details['telephone'];
-    $package_name = $_POST['package_name'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $check_in = $_POST['check_in'];
-    $check_out = $_POST['check_out'];
-    $num_guests = $_POST['num_guests'];
-    $room_number = $_POST['room_number'];
+    $package_name = isset($_POST['package_name']) ? $_POST['package_name'] : null;
+    $description = isset($_POST['description']) ? $_POST['description'] : null;
+    $price = isset($_POST['price']) ? $_POST['price'] : null;
     $valid = true;
 
     $current_date = new DateTime();
@@ -60,34 +55,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
-    if (empty($check_in)) {
-        $errorMessages['check_in'] = 'Check-in date is required.';
-        $valid = false;
-    }
-    if (empty($check_out)) {
-        $errorMessages['check_out'] = 'Check-out date is required.';
-        $valid = false;
-    }
-    if (empty($num_guests) || $num_guests < 1) {
-        $errorMessages['num_guests'] = 'Valid number of guests is required.';
-        $valid = false;
-    }
-    if (empty($room_number)) {
-        $errorMessages['room_number'] = 'Room number is required.';
-        $valid = false;
-    }
 
     if ($valid) {
-        $stmt = $conn->prepare("INSERT INTO package_buys (name, email, telephone, package_name, description, price, check_in, check_out, num_guests, room_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssssss", $name, $email, $telephone, $package_name, $description, $price, $check_in, $check_out, $num_guests, $room_number);
+        if ($name && $email && $telephone && $package_name && $description && $price) {
+            $stmt = $conn->prepare("INSERT INTO package_buys (name, email, telephone, package_name, description, price) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssss", $name, $email, $telephone, $package_name, $description, $price);
 
-        if ($stmt->execute()) {
-            header("Location: ../Profile/Profile.php");
-            exit();
+            if ($stmt->execute()) {
+                header("Location: ../Profile/Profile.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+            $stmt->close();
         } else {
-            echo "Error: " . $stmt->error;
+            $errorMessages["form"] = "All fields are required.";
         }
-        $stmt->close();
     }
 }
 
@@ -108,10 +91,12 @@ $conn->close();
         }
     </style>
 
+
     <script>
         function toggleReservationDetails() {
             var checkbox = document.getElementById('associate_room');
             var reservationDetails = document.getElementById('reservation_details');
+            var body = document.body;
             if (checkbox.checked) {
                 reservationDetails.classList.remove('hidden');
             } else {
@@ -126,7 +111,47 @@ $conn->close();
                 document.getElementById('description').value = packageData.description;
                 document.getElementById('price').value = packageData.price;
             }
+
+            document.getElementById('type_of_room').addEventListener('change', function () {
+                fetchRoomsByType(this.value);
+            });
+
+            document.getElementById('room_number').addEventListener('change', function () {
+                fetchRoomDetails(this.value);
+            });
         });
+
+        function fetchRoomsByType(roomType) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `get_rooms_by_type.php?type_of_room=${roomType}`, true);
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const rooms = JSON.parse(this.responseText);
+                    const roomNumberSelect = document.getElementById('room_number');
+                    roomNumberSelect.innerHTML = '<option value="">Select a room</option>';
+                    rooms.forEach(room => {
+                        const option = document.createElement('option');
+                        option.value = room.room_number;
+                        option.textContent = room.room_number;
+                        roomNumberSelect.appendChild(option);
+                    });
+                }
+            };
+            xhr.send();
+        }
+
+        function fetchRoomDetails(roomNumber) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `get_room_details.php?room_number=${roomNumber}`, true);
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const room = JSON.parse(this.responseText);
+                    document.getElementById('room_name').value = room.room_name;
+                    document.getElementById('price').value = room.price;
+                }
+            };
+            xhr.send();
+        }
 
         function storeReservationData() {
             const reservationData = {
@@ -139,58 +164,8 @@ $conn->close();
             };
             sessionStorage.setItem('reservationData', JSON.stringify(reservationData));
         }
-
-        document.getElementById('type_of_room').addEventListener('change', function () {
-            var typeOfRoom = this.value;
-            if (typeOfRoom) {
-                fetchRoomNumbers(typeOfRoom);
-            }
-        });
-
-        function fetchRoomNumbers(typeOfRoom) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'get_rooms_by_type.php?type_of_room=' + typeOfRoom, true);
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    var rooms = JSON.parse(xhr.responseText);
-                    var roomNumberSelect = document.getElementById('room_number');
-                    roomNumberSelect.innerHTML = ''; // Clear previous options
-                    rooms.forEach(function (room) {
-                        var option = document.createElement('option');
-                        option.value = room;
-                        option.text = room;
-                        roomNumberSelect.appendChild(option);
-                    });
-                }
-            };
-            xhr.send();
-        }
-
-        document.getElementById('room_number').addEventListener('change', function () {
-            var roomNumber = this.value;
-            if (roomNumber) {
-                fetchRoomDetails(roomNumber);
-            }
-        });
-
-        function fetchRoomDetails(roomNumber) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'get_room_details.php?room_number=' + roomNumber, true);
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    var roomDetails = JSON.parse(xhr.responseText);
-                    if (!roomDetails.error) {
-                        document.getElementById('price').value = roomDetails.price;
-                        // You can add additional fields here as needed, for example:
-                        // document.getElementById('capacity').value = roomDetails.capacity;
-                    } else {
-                        alert(roomDetails.error);
-                    }
-                }
-            };
-            xhr.send();
-        }
     </script>
+
 </head>
 
 <body>
@@ -235,14 +210,16 @@ $conn->close();
             <fieldset id="reservation_details" class="hidden">
                 <legend>Detalhes Da Reserva</legend>
                 <label for="type_of_room">Tipo do Quarto:</label>
-                <select id="type_of_room" name="type_of_room">
+                <select id="type_of_room" name="type_of_room" required>
                     <option value="1">Suite</option>
                     <option value="2">Deluxe</option>
                     <option value="3">Family</option>
                 </select>
 
                 <label for="room_number">Número do Quarto:</label>
-                <select id="room_number" name="room_number" required></select>
+                <select id="room_number" name="room_number" required>
+                    <option value="">Select a room</option>
+                </select>
 
                 <label for="room_name">Nome Do Quarto:</label>
                 <input type="text" id="room_name" name="room_name" readonly>
@@ -256,10 +233,13 @@ $conn->close();
                 <span class="error"><?php echo $errorMessages['check_out']; ?></span>
 
                 <label for="num_guests">Número de Pessoas:</label>
-                <input type="number" id="num_guests" name="num_guests" min="1" required>
-                <span class="error"><?php echo $errorMessages['num_guests']; ?></span>
-            </fieldset>
+                <input type="number" id="num_guests" name="num_guests" required>
+                <span class="error"><?php echo htmlspecialchars($errorMessages['num_guests']); ?></span>
 
+                <label for="price">Preço:</label>
+                <input type="text" id="price" name="price" readonly>
+                <span class="error"><?php echo htmlspecialchars($errorMessages['price']); ?></span>
+            </fieldset>
             <a href="../Services/Services.php" class="avoltar">Voltar</a>
             <button type="submit">Check out</button>
         </form>
