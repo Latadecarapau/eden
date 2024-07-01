@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../db.php';
+
 if (!isset($_SESSION['user_email'])) {
     header("Location: ../Login/Login.php");
     exit();
@@ -16,7 +17,6 @@ if ($result->num_rows == 0) {
 
 $user_details = $result->fetch_assoc();
 
-// Retrieve posted package details
 $id_package = isset($_POST['id_package']) ? $_POST['id_package'] : '';
 $package_name = isset($_POST['package_name']) ? $_POST['package_name'] : '';
 $description = isset($_POST['description']) ? $_POST['description'] : '';
@@ -25,34 +25,69 @@ $price = isset($_POST['price']) ? $_POST['price'] : '';
 $errorMessages = [
     'package_name' => '',
     'description' => '',
-    'price' => ''
+    'price' => '',
+    'check_in' => '',
+    'check_out' => '',
+    'num_guests' => '',
+    'room_number' => ''
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $user_details['firstname'] . " " . $user_details['lastname'];
     $email = $user_details['email'];
     $telephone = $user_details['telephone'];
-    $package_name = isset($_POST['package_name']) ? $_POST['package_name'] : null;
-    $description = isset($_POST['description']) ? $_POST['description'] : null;
-    $price = isset($_POST['price']) ? $_POST['price'] : null;
-
+    $package_name = $_POST['package_name'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $check_in = $_POST['check_in'];
+    $check_out = $_POST['check_out'];
+    $num_guests = $_POST['num_guests'];
+    $room_number = $_POST['room_number'];
     $valid = true;
 
-    if ($valid) {
-        if ($name && $email && $telephone && $package_name && $description && $price) {
-            $stmt = $conn->prepare("INSERT INTO reservations (name, email, telephone, package_name, description, price) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssss", $name, $email, $telephone, $package_name, $description, $price);
+    $current_date = new DateTime();
+    $check_in_date = new DateTime($check_in);
+    $check_out_date = new DateTime($check_out);
 
-            if ($stmt->execute()) {
-                header("Location: ../Profile/Profile.php");
-                exit();
-            } else {
-                echo "Error: " . $stmt->error;
-            }
-            $stmt->close();
+    if ($check_in_date < $current_date) {
+        $errorMessages["check_in"] = "Check-in date cannot be earlier than today's date.";
+        $valid = false;
+    }
+
+    if ($check_out_date <= $check_in_date) {
+        $errorMessages["check_out"] = "Check-out date must be later than the check-in date.";
+        $valid = false;
+    }
+
+
+    if (empty($check_in)) {
+        $errorMessages['check_in'] = 'Check-in date is required.';
+        $valid = false;
+    }
+    if (empty($check_out)) {
+        $errorMessages['check_out'] = 'Check-out date is required.';
+        $valid = false;
+    }
+    if (empty($num_guests) || $num_guests < 1) {
+        $errorMessages['num_guests'] = 'Valid number of guests is required.';
+        $valid = false;
+    }
+    if (empty($room_number)) {
+        $errorMessages['room_number'] = 'Room number is required.';
+        $valid = false;
+    }
+
+    if ($valid) {
+        $stmt = $conn->prepare("INSERT INTO package_buys (name, email, telephone, package_name, description, price, check_in, check_out, num_guests, room_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssssss", $name, $email, $telephone, $package_name, $description, $price, $check_in, $check_out, $num_guests, $room_number);
+
+        if ($stmt->execute()) {
+            header("Location: ../Profile/Profile.php");
+            exit();
         } else {
-            $errorMessages["form"] = "All fields are required.";
+            echo "Error: " . $stmt->error;
         }
+        $stmt->close();
     }
 }
 
@@ -77,15 +112,13 @@ $conn->close();
         function toggleReservationDetails() {
             var checkbox = document.getElementById('associate_room');
             var reservationDetails = document.getElementById('reservation_details');
-            var body = document.body;
             if (checkbox.checked) {
                 reservationDetails.classList.remove('hidden');
-                body.classList.add('zoomed-in');
             } else {
                 reservationDetails.classList.add('hidden');
-                body.classList.remove('zoomed-in');
             }
         }
+
         document.addEventListener('DOMContentLoaded', function () {
             const packageData = JSON.parse(sessionStorage.getItem('packageData'));
             if (packageData) {
@@ -107,46 +140,55 @@ $conn->close();
             sessionStorage.setItem('reservationData', JSON.stringify(reservationData));
         }
 
-        function fetchRooms() {
-            var type_of_room = document.getElementById('type_of_room').value;
-            var modal = document.getElementById('roomModal');
-            var modalContent = document.getElementById('modalContent');
+        document.getElementById('type_of_room').addEventListener('change', function () {
+            var typeOfRoom = this.value;
+            if (typeOfRoom) {
+                fetchRoomNumbers(typeOfRoom);
+            }
+        });
 
-            // Make AJAX request to fetch rooms
+        function fetchRoomNumbers(typeOfRoom) {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'fetch_type.php?room_type=' + type_of_room, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
+            xhr.open('GET', 'get_rooms_by_type.php?type_of_room=' + typeOfRoom, true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
                     var rooms = JSON.parse(xhr.responseText);
-
-                    var content = '<table><tr><th>Nome do Quarto</th><th>Número do Quarto</th><th>Capacidade</th><th>Preço</th></tr>';
-                    rooms.forEach(room => {
-                        content += `<tr>
-                            <td>${room.room_name}</td>
-                            <td>${room.room_number}</td>
-                            <td>${room.capacity}</td>
-                            <td>${room.price}</td>
-                        </tr>`;
+                    var roomNumberSelect = document.getElementById('room_number');
+                    roomNumberSelect.innerHTML = ''; // Clear previous options
+                    rooms.forEach(function (room) {
+                        var option = document.createElement('option');
+                        option.value = room;
+                        option.text = room;
+                        roomNumberSelect.appendChild(option);
                     });
-                    content += '</table>';
-
-                    modalContent.innerHTML = content;
-                    modal.style.display = 'block';
                 }
             };
             xhr.send();
         }
 
-        function closeModal() {
-            var modal = document.getElementById('roomModal');
-            modal.style.display = 'none';
-        }
-
-        window.onclick = function (event) {
-            var modal = document.getElementById('roomModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+        document.getElementById('room_number').addEventListener('change', function () {
+            var roomNumber = this.value;
+            if (roomNumber) {
+                fetchRoomDetails(roomNumber);
             }
+        });
+
+        function fetchRoomDetails(roomNumber) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'get_room_details.php?room_number=' + roomNumber, true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var roomDetails = JSON.parse(xhr.responseText);
+                    if (!roomDetails.error) {
+                        document.getElementById('price').value = roomDetails.price;
+                        // You can add additional fields here as needed, for example:
+                        // document.getElementById('capacity').value = roomDetails.capacity;
+                    } else {
+                        alert(roomDetails.error);
+                    }
+                }
+            };
+            xhr.send();
         }
     </script>
 </head>
@@ -193,22 +235,17 @@ $conn->close();
             <fieldset id="reservation_details" class="hidden">
                 <legend>Detalhes Da Reserva</legend>
                 <label for="type_of_room">Tipo do Quarto:</label>
-                <select id="type_of_room" name="type_of_room" onchange="fetchRooms()">
+                <select id="type_of_room" name="type_of_room">
                     <option value="1">Suite</option>
                     <option value="2">Deluxe</option>
                     <option value="3">Family</option>
                 </select>
-                <span class="error"><?php echo htmlspecialchars($errorMessages['type_of_room']); ?></span>
 
                 <label for="room_number">Número do Quarto:</label>
-                <input type="text" id="room_number" name="room_number"
-                    value="<?php echo htmlspecialchars($room_number); ?>" required>
-                <span class="error"><?php echo htmlspecialchars($errorMessages['room_number']); ?></span>
+                <select id="room_number" name="room_number" required></select>
 
                 <label for="room_name">Nome Do Quarto:</label>
-                <input type="text" id="room_name" name="room_name" value="<?php echo htmlspecialchars($room_name); ?>"
-                    readonly>
-                <span class="error"><?php echo $errorMessages['room_name']; ?></span>
+                <input type="text" id="room_name" name="room_name" readonly>
 
                 <label for="check_in">Check-in:</label>
                 <input type="date" id="check_in" name="check_in" required>
@@ -221,22 +258,13 @@ $conn->close();
                 <label for="num_guests">Número de Pessoas:</label>
                 <input type="number" id="num_guests" name="num_guests" min="1" required>
                 <span class="error"><?php echo $errorMessages['num_guests']; ?></span>
-
-                <label for="price">Preço:</label>
-                <input type="text" id="price" name="price" value="<?php echo htmlspecialchars($price); ?>" readonly>
-                <span class="error"><?php echo $errorMessages['price']; ?></span>
             </fieldset>
 
             <a href="../Services/Services.php" class="avoltar">Voltar</a>
             <button type="submit">Check out</button>
         </form>
     </div>
-    <div id="roomModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div id="modalContent"></div>
-        </div>
-    </div>
+
 </body>
 
 </html>
