@@ -20,15 +20,16 @@ $user_details = $result->fetch_assoc();
 $id_package = isset($_POST['id_package']) ? $_POST['id_package'] : '';
 $package_name = isset($_POST['package_name']) ? $_POST['package_name'] : '';
 $description = isset($_POST['description']) ? $_POST['description'] : '';
-$price = isset($_POST['price']) ? $_POST['price'] : '';
+$price_package = isset($_POST['price_package']) ? $_POST['price_package'] : '';
 
 $errorMessages = [
     'package_name' => '',
     'description' => '',
-    'price' => '',
+    'price_package' => '',
     'check_out' => '',
     'check_in' => '',
-    'num_guests' => ''
+    'num_guests' => '',
+    'price' => ''
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telephone = $user_details['telephone'];
     $package_name = isset($_POST['package_name']) ? $_POST['package_name'] : null;
     $description = isset($_POST['description']) ? $_POST['description'] : null;
-    $price = isset($_POST['price']) ? $_POST['price'] : null;
+    $price_package = isset($_POST['price_package']) ? $_POST['price_package'] : null;
     $valid = true;
 
     $current_date = new DateTime();
@@ -58,8 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($valid) {
         if ($name && $email && $telephone && $package_name && $description && $price) {
-            $stmt = $conn->prepare("INSERT INTO package_buys (name, email, telephone, package_name, description, price) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssss", $name, $email, $telephone, $package_name, $description, $price);
+            $stmt = $conn->prepare("INSERT INTO package_buys (name, email, telephone, package_name, description, price_package) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssss", $name, $email, $telephone, $package_name, $description, $price_package);
 
             if ($stmt->execute()) {
                 header("Location: ../Profile/Profile.php");
@@ -109,7 +110,7 @@ $conn->close();
             if (packageData) {
                 document.getElementById('package_name').value = packageData.name;
                 document.getElementById('description').value = packageData.description;
-                document.getElementById('price').value = packageData.price;
+                document.getElementById('price_package').value = packageData.price;
             }
 
             document.getElementById('type_of_room').addEventListener('change', function () {
@@ -160,7 +161,8 @@ $conn->close();
                 email: document.getElementById('email').value,
                 package_name: document.getElementById('package_name').value,
                 description: document.getElementById('description').value,
-                price: document.getElementById('price').value
+                price_package: document.getElementById('price_package').value
+                
             };
             sessionStorage.setItem('reservationData', JSON.stringify(reservationData));
         }
@@ -171,7 +173,7 @@ $conn->close();
 <body>
     <div class="reservation-form">
         <h2>Reserva de um Quarto</h2>
-        <form action="payment.php" method="post" onsubmit="storeReservationData()">
+        <form action="paymentpackage.php" method="post" onsubmit="storeReservationData()">
             <fieldset>
                 <legend>Informação Pessoal</legend>
                 <label for="name">Nome:</label>
@@ -198,9 +200,10 @@ $conn->close();
                     value="<?php echo htmlspecialchars($description); ?>" readonly>
                 <span class="error"><?php echo htmlspecialchars($errorMessages['description']); ?></span>
 
-                <label for="price">Preço:</label>
-                <input type="text" id="price" name="price" value="<?php echo htmlspecialchars($price); ?>" readonly>
-                <span class="error"><?php echo htmlspecialchars($errorMessages['price']); ?></span>
+                <label for="price_package">Preço:</label>
+                <input type="text" id="price_package" name="price_package"
+                    value="<?php echo htmlspecialchars($price_package); ?>" readonly>
+                <span class="error"><?php echo htmlspecialchars($errorMessages['price_package']); ?></span>
 
                 <label for="associate_room"> Quer
                     associar complementar com um quarto? <input type="checkbox" id="associate_room"
@@ -211,6 +214,7 @@ $conn->close();
                 <legend>Detalhes Da Reserva</legend>
                 <label for="type_of_room">Tipo do Quarto:</label>
                 <select id="type_of_room" name="type_of_room" required>
+                    <option value="1">Categoria</option>
                     <option value="1">Suite</option>
                     <option value="2">Deluxe</option>
                     <option value="3">Family</option>

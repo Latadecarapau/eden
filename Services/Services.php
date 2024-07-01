@@ -2,7 +2,7 @@
 session_start();
 $loggedIn = isset($_SESSION['username']);
 require '../db.php';
-$sql = "SELECT id_package, package_name, price, images, description FROM packages";
+$sql = "SELECT id_package, package_name, price_package, images, description FROM packages";
 $result = $conn->query($sql);
 ?>
 
@@ -80,8 +80,8 @@ $result = $conn->query($sql);
                     echo "<div class='service__card__details'>";
                     echo "<h4>" . $row["package_name"] . "</h4>";
                     echo "<p>" . $row["description"] . "</p>";
-                    echo "<h5>Starting from <span>$" . $row["price"] . "</span></h5>";
-                    echo "<button class='btn book-now' data-id='" . $row["id_package"] . "' data-name='" . $row["package_name"] . "' data-price='" . $row["price"] . "' data-description='" . $row["description"] . "' data-logged-in='" . ($loggedIn ? 'true' : 'false') . "'>Book Now</button>";
+                    echo "<h5>Starting from <span>$" . $row["price_package"] . "</span></h5>";
+                    echo "<button class='btn book-now' data-id='" . $row["id_package"] . "' data-name='" . $row["package_name"] . "' data-price='" . $row["price_package"] . "' data-description='" . $row["description"] . "' data-logged-in='" . ($loggedIn ? 'true' : 'false') . "'>Book Now</button>";
                     echo "</div>";
                     echo "</div>";
                 }
