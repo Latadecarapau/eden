@@ -156,9 +156,9 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                 <div class="row">
 
                     <div class="col-lg-10 col-12 mx-auto">
-                        <h1 class="text-white">Kitchen's Story</h1>
+                        <h1 class="text-white">A Nossa Cozinha</h1>
 
-                        <strong class="text-white">this is how our kitchen evolved in new digital era</strong>
+                        <strong class="text-white">Tudo o que precisas saber</strong>
                     </div>
 
                 </div>
@@ -172,25 +172,21 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-2">
-                        <h4 class="mb-3">Crispy Kitchen is the latest Bootstrap 5 HTML template provided by Tooplate
-                            website.</h4>
+                        <h4 class="mb-3">A nossa cozinha foi criada com o objetivo de cativar o público a saborear nossas comidas tradicionais portuguesas, sendo avaliada com uma das melhores classificações a nível nacional.</h4>
 
-                        <a href="news.html" class="custom-btn btn btn-dark mt-3">Check out News</a>
+                        <a href="../Contactos/ContactForm.php" class="custom-btn btn btn-dark mt-3">Contacta-nos</a>
 
-                        <a href="contact.html" class="custom-btn btn btn-danger mt-3 ms-3">Say Hi</a>
+                        
                     </div>
 
                     <div class="col-lg-6 col-12">
 
-                        <p>Since this website template is 100% free to use, you can edit and apply it for your
-                            commercial restaurant websites. There are 6 HTML pages included in this template. Please
-                            <strong>click "Reservation" button</strong> on the top right to see the pop-up reservation
-                            form.
+                        <p>Se te sentes interessado/a em experimentar algumas das nossas comidas típicas com a melhor qualidade possível, atreve-te a
+                            <strong>clicar em Reservar Mesa</strong> no botão vermelho no topo da página à direita.
                         </p>
 
-                        <p>You are NOT allowed to redistribute the template ZIP file on any template donwnload website.
-                            Please <a href="https://www.tooplate.com/contact" target="_blank">contact us</a> for more
-                            information.</p>
+                        <p>Tens alguma dúvida? ou tens alguma dica para nos dar? 
+                            <br>Por favor <a href="../Contactos/ContactForm.php" target="_blank">Contacta-nos</a></p>
 
                     </div>
 
@@ -203,30 +199,30 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                 <div class="row">
 
                     <div class="col-12">
-                        <h2 class="mb-5">Team Members</h2>
+                        <h2 class="mb-5">Quem somos nós?</h2>
                     </div>
 
                     <div class="col-lg-4 col-12">
                         <div class="team-thumb">
-                            <img src="images/team/matthew-hamilton-tNCH0sKSZbA-unsplash.jpg"
+                            <img src="assetservice/guilher.png"
                                 class="img-fluid team-image" alt="">
 
                             <div class="team-info">
-                                <h4 class="mt-3 mb-0">Sophia</h4>
+                                <h4 class="mt-3 mb-0">Guilherme Mendes</h4>
 
-                                <p>CEO &amp; Founder</p>
+                                <p>CEO &amp; Fundador</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-12 my-lg-0 my-4">
                         <div class="team-thumb">
-                            <img src="images/team/nicolas-horn-MTZTGvDsHFY-unsplash.jpg" class="img-fluid team-image"
-                                alt="">
+                            <img src="assetservice/CLAU.JPG" 
+                            class="img-fluid team-image" alt="">
 
-                            <h4 class="mt-3 mb-0">Benjamin W.</h4>
+                            <h4 class="mt-3 mb-0">Cláudia Pires</h4>
 
-                            <p>Restaurant Manager</p>
+                            <p>Gerente do Restaurante</p>
                         </div>
                     </div>
 
@@ -241,37 +237,6 @@ https://www.tooplate.com/view/2129-crispy-kitchen
                     </div>
 
                 </div>
-            </div>
-        </section>
-
-        <section class="newsletter section-padding bg-white">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-6 col-12">
-                        <img src="images/charles-deluvio-FdDkfYFHqe4-unsplash.jpg" class="img-fluid newsletter-image"
-                            alt="">
-                    </div>
-
-                    <div class="col-lg-6 col-12 d-flex align-items-center mt-5 mt-lg-0 mx-auto">
-                        <div class="subscribe-form-wrap">
-                            <h4 class="mb-0">Our Newsletter</h4>
-
-                            <p>The food news every day</p>
-
-                            <form class="custom-form subscribe-form mt-4" role="form">
-                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
-                                    class="form-control" placeholder="Your email address" required="">
-
-                                <button type="submit" class="form-control mb-3" id="subscribe">Subscribe</button>
-
-                                <small>By signing up, you agree to our Privacy Notice and the data policy</small>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
             </div>
         </section>
 
