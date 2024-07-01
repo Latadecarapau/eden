@@ -2,79 +2,37 @@
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-require '../vendor/autoload.php';
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 require '../db.php';
 
 // verificar se o form está submitido e preenchido
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    try {
-        // Buscar a data do form via post
-        $firstname = $_POST["firstname"];
-        $lastname = $_POST["lastname"];
-        $username = $_POST["username"];
-        $email = $_POST["email"];
-        $telephone = $_POST["telephone"];
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $confirmPassword = $_POST["confirmPassword"];
-        $gender = $_POST["gender"];
-        $phone_area = $_POST["phone_area"];
+
+    // Buscar a data do form via post
+    $firstname = $_POST["firstname"];
+    $lastname = $_POST["lastname"];
+    $username = $_POST["username"];
+    $email = $_POST["email"];
+    $telephone = $_POST["telephone"];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $confirmPassword = $_POST["confirmPassword"];
+    $gender = $_POST["gender"];
+    $phone_area = $_POST["phone_area"];
 
 
-        // Inserir na database
-        $sql = "INSERT INTO users (firstname, lastname, username, email, phone_area, telephone, password, gender) 
+    // Inserir na database
+    $sql = "INSERT INTO users (firstname, lastname, username, email, phone_area, telephone, password, gender) 
                 VALUES ('$firstname', '$lastname', '$username', '$email','$phone_area','$telephone', '$password',
                  '$gender')";
 
-        if ($conn->query($sql) === TRUE) {
-            header("Location: ../login/Login.php");
-            exit();
-        } else {
-            throw new Exception("Error: " . $conn->error);
-        }
-
-        // Retrieve form data
-        $primeiroNome = $_POST["firstname"];
-        $apelido = $_POST["lastname"];
-        $email = $_POST["email"];
-
-        // Create a new PHPMailer instance
-        $mail = new PHPMailer(true);
-
-        try {
-            // Server settings
-            // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // Enable verbose debug output (optional)
-            $mail->SMTPDebug = 2; // Enable verbose debug output1
-            $mail->isSMTP(); // Set mailer to use SMTP
-            $mail->Host = 'localhost'; // Specify SMTP server
-            $mail->SMTPAuth = true; // Enable SMTP authentication
-            $mail->Username = 'hoteleden2024kgm@gmail.com'; // SMTP username
-            $mail->Password = 'hoteleden1730'; // SMTP password
-            $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 587; // TCP port to connect to
-
-            // Sender information
-            $mail->setFrom('hoteleden2024kgm@gmail.com', 'Hotel Eden');
-
-            // Recipient information
-            $mail->addAddress($email, $firstname); // Add a recipient
-
-            // Email content
-            $mail->isHTML(true); // Set email format to HTML
-            $mail->Subject = 'Welcome to Our Website';
-            $mail->Body = "Hello $firstname $lastname,<br><br>Thank you for registering on our website. We're glad to have you as a member!<br><br>Best regards,<br>Hotel Eden Team";
-
-            // Send email
-            $mail->send();
-            echo 'Welcome email sent successfully!';
-        } catch (Exception $e) {
-            echo "Failed to send welcome email. Error: {$mail->ErrorInfo}";
-        }
-    } catch (Exception $e) {
-        echo "<script>alert('Error: " . $e->getMessage() . "');</script>";
+    if ($conn->query($sql) === TRUE) {
+        header("Location: ../login/Login.php");
+        exit();
+    } else {
+        throw new Exception("Error: " . $conn->error);
     }
+
+
 }
 
 // fechar conexão
@@ -167,8 +125,7 @@ $conn->close();
                             <option id="6" value="+351-PT">+351 (Portugal)</option>
                             <!-- Add more country codes as needed -->
                         </select>
-                        <input type="text" id="telephone" name="telephone" placeholder=""
-                            required />
+                        <input type="text" id="telephone" name="telephone" placeholder="" required />
                     </div>
                 </div>
 

@@ -17,7 +17,7 @@ session_start();
 <body>
     <div class="contact-form">
         <h2>Contact-nos</h2>
-        <form action="ContactForm.php" method="post">
+        <form action="send.php" method="post">
             <div class="form-group">
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" required>
