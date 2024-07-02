@@ -4,11 +4,17 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require '../db.php';
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
 
-// verificar se o form está submitido e preenchido
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Verify if the form is submitted and filled
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Buscar a data do form via post
+    // Get data from the form via POST
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $username = $_POST["username"];
@@ -19,23 +25,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender = $_POST["gender"];
     $phone_area = $_POST["phone_area"];
 
-
-    // Inserir na database
+    // Insert into the database
     $sql = "INSERT INTO users (firstname, lastname, username, email, phone_area, telephone, password, gender) 
-                VALUES ('$firstname', '$lastname', '$username', '$email','$phone_area','$telephone', '$password',
-                 '$gender')";
+                VALUES ('$firstname', '$lastname', '$username', '$email','$phone_area','$telephone', '$password', '$gender')";
 
     if ($conn->query($sql) === TRUE) {
+        // Send welcome email
+        $mail = new PHPMailer(true);
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'hoteleden2024kgm@gmail.com'; // Your email
+            $mail->Password = 'hfvtkpxvzxlxgbsr'; // Your email password
+            $mail->SMTPSecure = 'ssl';   // Enable SSL encryption
+            $mail->Port = 465;     
+
+            // Recipients
+            $mail->setFrom('hoteleden2024kgm@gmail.com', 'Hotel Eden');
+            $mail->addAddress($email); // Add recipient
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Bem-Vindo Ao Hotel Eden!!! :)';
+            $mail->Body    = "Caro $firstname $lastname,<br><br>Estamos Gratos por ter aderido ao Hotel Eden Aproveite as suas ferias connosco.<br><br>Melhores Comprimentos e estadia,<br>Hotel Eden Team";
+            $mail->AltBody = "Caro $firstname $lastname,\n\nEstamos Gratos por ter aderido ao Hotel Eden Aproveite as suas ferias connosco.\n\nMelhores Comprimentos e estadia,\nHotel Eden Team";
+
+            $mail->send();
+        } catch (Exception $e) {
+            // Handle the error if the email fails to send
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+        // Redirect to login page
         header("Location: ../login/Login.php");
         exit();
     } else {
         throw new Exception("Error: " . $conn->error);
     }
-
-
 }
 
-// fechar conexão
+// Close connection
 $conn->close();
 ?>
 

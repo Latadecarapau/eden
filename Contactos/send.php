@@ -40,17 +40,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Content
             $mail->isHTML(true);                          // Set email format to HTML
             $mail->Subject = 'New Contact Form Submission';
-            $mail->Body    = "<h2>Contact Form Submission</h2>
+            $mail->Body = "<h2>Contact Form Submission</h2>
                               <p><strong>Name:</strong> {$name}</p>
                               <p><strong>Message:</strong> {$message}</p>";
             $mail->AltBody = "Name: {$name}\nMessage: {$message}";
 
             $mail->send();
-            echo 'Message has been sent';
+            $_SESSION['success_message'] = "Seu form foi enviado com sucesso.";
+            header('Location: ContactForm.php' . $_SERVER['PHP_SELF']);
+            exit();
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     } else {
-        echo "Please fill in all fields.";
+        echo "Preecha todos os campos";
     }
 }

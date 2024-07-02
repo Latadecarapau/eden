@@ -260,7 +260,7 @@ $total_rooms = $result_rooms->fetch_assoc()['total_rooms'];
          Descubra seu Hotel de sonho e paradisiaco aqui
          com EdenHotel
         </p>
-        <a href="../Contactos/ContactForm.php"><button class="btn">CONTACT-NOS</button></a>
+        <a href="../Contactos/ContactForm.php"><button class="btn">CONTACTA-NOS</button></a>
       </div>
       <div class="footer__col">
         <h4>QUICK LINKS</h4>

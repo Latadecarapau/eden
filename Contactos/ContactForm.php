@@ -14,9 +14,10 @@ session_start();
     <link rel="stylesheet" href="ContactForm.css">
 </head>
 
+
 <body>
     <div class="contact-form">
-        <h2>Contact-nos</h2>
+        <h2>Contacta-nos</h2>
         <form action="send.php" method="post">
             <div class="form-group">
                 <label for="name">Nome:</label>
@@ -30,6 +31,23 @@ session_start();
             <button type="submit">Enviar</button>
         </form>
     </div>
+
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="success-message" id="successMessage"><?php echo $_SESSION['success_message']; ?></div>
+        <?php unset($_SESSION['success_message']); endif; ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.style.display = 'block';
+                setTimeout(function () {
+                    successMessage.style.display = 'none';
+                }, 3000); // Hide after 3 seconds
+            }
+        });
+    </script>
 </body>
+
 
 </html>
