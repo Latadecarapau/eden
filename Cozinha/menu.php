@@ -437,26 +437,25 @@ $conn->close();
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="mb-lg-5 mb-4">Outras Refeições</h2>
+                        <h2 class="mb-lg-5 mb-4">Sobremesas</h2>
                     </div>
 
                     <div class="col">
                         <div class="menu-thumb">
-                            <img src="assetservice/bito.png" class="img-fluid menu-image" alt="">
+                            <img src="assetservice/leit.jpg" class="img-fluid menu-image" alt="">
                             <div class="menu-info">
-                                <h4 class="mb-0">O Bitoque</h4>
-                                <p class="reviews-text mb-2">Carne grelhada acompanhada de arroz simples, batata frita,
-                                    ovo estrelado e salada. A carne pode ser de vaca, de porco ou de frango.</p>
+                                <h4 class="mb-0">Leite Creme</h4>
+                                <p class="reviews-text mb-2"></p>
                                 <div class="details">
-                                    <span class="price-tag"><small>€</small>15,99</span>
+                                    <span class="price-tag"><small>€</small>3,99</span>
                                     <div class="d-flex align-items-center">
-                                        <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+                                        <h6 class="reviews-text mb-0 me-3">5/5</h6>
                                         <div class="reviews-stars">
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star-fill reviews-icon"></i>
-                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
                                         </div>
                                         <p class="reviews-text mb-0 ms-4">102 Avaliações</p>
                                     </div>
@@ -467,13 +466,12 @@ $conn->close();
 
                     <div class="col">
                         <div class="menu-thumb">
-                            <img src="assetservice/mari.png" class="img-fluid menu-image" alt="">
+                            <img src="assetservice/mous.png" class="img-fluid menu-image" alt="">
                             <div class="menu-info">
-                                <h4 class="mb-0">Cataplana do Pescador</h4>
-                                <p class="reviews-text mb-2">Mexilhão fresco, berbigão fresco, camarão e ameijoa
-                                    servidos numa cataplana acompanhado do nosso tempero.</p>
+                                <h4 class="mb-0">Mousse de Chocolate</h4>
+                                <p class="reviews-text mb-2"></p>
                                 <div class="details">
-                                    <span class="price-tag"><small>€</small>35,99</span>
+                                    <span class="price-tag"><small>€</small>2,99</span>
                                     <div class="d-flex align-items-center">
                                         <h6 class="reviews-text mb-0 me-3">4/5</h6>
                                         <div class="reviews-stars">
@@ -483,7 +481,7 @@ $conn->close();
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star reviews-icon"></i>
                                         </div>
-                                        <p class="reviews-text mb-0 ms-4">176 Avaliações</p>
+                                        <p class="reviews-text mb-0 ms-4">76 Avaliações</p>
                                     </div>
                                 </div>
                             </div>
@@ -492,14 +490,12 @@ $conn->close();
 
                     <div class="col">
                         <div class="menu-thumb">
-                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
+                            <img src="assetservice/CHESE.png" class="img-fluid menu-image" alt="">
                             <div class="menu-info">
-                                <h4 class="mb-0">O Banquete</h4>
-                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
-                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
-                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
+                                <h4 class="mb-0">Cheesecake</h4>
+                                <p class="reviews-text mb-2"></p>
                                 <div class="details">
-                                    <span class="price-tag"><small>€</small>109,99</span>
+                                    <span class="price-tag"><small>€</small>4,99</span>
                                     <div class="d-flex align-items-center">
                                         <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
                                         <div class="reviews-stars">
@@ -523,28 +519,27 @@ $conn->close();
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="mb-lg-5 mb-4">Outras Refeições</h2>
+                        <h2 class="mb-lg-5 mb-4">Bebidas</h2>
                     </div>
 
                     <div class="col">
                         <div class="menu-thumb">
-                            <img src="assetservice/bito.png" class="img-fluid menu-image" alt="">
+                            <img src="assetservice/PRAIAAGUA.png" class="img-fluid menu-image" alt="">
                             <div class="menu-info">
-                                <h4 class="mb-0">O Bitoque</h4>
-                                <p class="reviews-text mb-2">Carne grelhada acompanhada de arroz simples, batata frita,
-                                    ovo estrelado e salada. A carne pode ser de vaca, de porco ou de frango.</p>
+                                <h4 class="mb-0">Água 0.5L</h4>
+                                <p class="reviews-text mb-2">Água da Garrafa</p>
                                 <div class="details">
-                                    <span class="price-tag"><small>€</small>15,99</span>
+                                    <span class="price-tag"><small>€</small>1,60</span>
                                     <div class="d-flex align-items-center">
-                                        <h6 class="reviews-text mb-0 me-3">4.4/5</h6>
+                                        <h6 class="reviews-text mb-0 me-3">5/5</h6>
                                         <div class="reviews-stars">
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star-fill reviews-icon"></i>
-                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
                                         </div>
-                                        <p class="reviews-text mb-0 ms-4">102 Avaliações</p>
+                                        <p class="reviews-text mb-0 ms-4">12 Avaliações</p>
                                     </div>
                                 </div>
                             </div>
@@ -553,23 +548,22 @@ $conn->close();
 
                     <div class="col">
                         <div class="menu-thumb">
-                            <img src="assetservice/mari.png" class="img-fluid menu-image" alt="">
+                            <img src="assetservice/PRAIAAGUA.png" class="img-fluid menu-image" alt="">
                             <div class="menu-info">
-                                <h4 class="mb-0">Cataplana do Pescador</h4>
-                                <p class="reviews-text mb-2">Mexilhão fresco, berbigão fresco, camarão e ameijoa
-                                    servidos numa cataplana acompanhado do nosso tempero.</p>
+                                <h4 class="mb-0">Água 1L</h4>
+                                <p class="reviews-text mb-2">Água da Garrafa</p>
                                 <div class="details">
-                                    <span class="price-tag"><small>€</small>35,99</span>
+                                    <span class="price-tag"><small>€</small>1,99</span>
                                     <div class="d-flex align-items-center">
-                                        <h6 class="reviews-text mb-0 me-3">4/5</h6>
+                                        <h6 class="reviews-text mb-0 me-3">5/5</h6>
                                         <div class="reviews-stars">
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star-fill reviews-icon"></i>
-                                            <i class="bi-star reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
                                         </div>
-                                        <p class="reviews-text mb-0 ms-4">176 Avaliações</p>
+                                        <p class="reviews-text mb-0 ms-4">15 Avaliações</p>
                                     </div>
                                 </div>
                             </div>
@@ -578,14 +572,12 @@ $conn->close();
 
                     <div class="col">
                         <div class="menu-thumb">
-                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
+                            <img src="assetservice/lara.png" class="img-fluid menu-image" alt="">
                             <div class="menu-info">
-                                <h4 class="mb-0">O Banquete</h4>
-                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
-                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
-                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
+                                <h4 class="mb-0">Sumo de Laranja</h4>
+                                <p class="reviews-text mb-2">Laranjas fresquinhas</p>
                                 <div class="details">
-                                    <span class="price-tag"><small>€</small>109,99</span>
+                                    <span class="price-tag"><small>€</small>3,99</span>
                                     <div class="d-flex align-items-center">
                                         <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
                                         <div class="reviews-stars">
@@ -595,7 +587,7 @@ $conn->close();
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star reviews-icon"></i>
                                         </div>
-                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
+                                        <p class="reviews-text mb-0 ms-4">16 Avaliações</p>
                                     </div>
                                 </div>
                             </div>
@@ -603,14 +595,35 @@ $conn->close();
                     </div>
                     <div class="col">
                         <div class="menu-thumb">
-                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
+                            <img src="assetservice/refri.jpg" class="img-fluid menu-image" alt="">
                             <div class="menu-info">
-                                <h4 class="mb-0">O Banquete</h4>
-                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
-                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
-                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
+                                <h4 class="mb-0">Refrigerantes</h4>
+                                <p class="reviews-text mb-2">Coca-cola, Coca-cola zero, Ice-tea , Seven-up, Guaraná, Fanta Laranja.</p>
                                 <div class="details">
-                                    <span class="price-tag"><small>€</small>109,99</span>
+                                    <span class="price-tag"><small>€</small>1,99</span>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="reviews-text mb-0 me-3">5/5</h6>
+                                        <div class="reviews-stars">
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                            <i class="bi-star-fill reviews-icon"></i>
+                                        </div>
+                                        <p class="reviews-text mb-0 ms-4">28 Avaliações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="menu-thumb">
+                            <img src="assetservice/vinho.png" class="img-fluid menu-image" alt="">
+                            <div class="menu-info">
+                                <h4 class="mb-0">Vinhos</h4>
+                                <p class="reviews-text mb-2">Vinho Branco/Vinho Tinto</p>
+                                <div class="details">
+                                    <span class="price-tag"><small>€</small>9,99</span>
                                     <div class="d-flex align-items-center">
                                         <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
                                         <div class="reviews-stars">
@@ -620,32 +633,7 @@ $conn->close();
                                             <i class="bi-star-fill reviews-icon"></i>
                                             <i class="bi-star reviews-icon"></i>
                                         </div>
-                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="menu-thumb">
-                            <img src="assetservice/banq.png" class="img-fluid menu-image" alt="">
-                            <div class="menu-info">
-                                <h4 class="mb-0">O Banquete</h4>
-                                <p class="reviews-text mb-2">Comida para a familia toda (6 pessoas). Bacalhau com natas,
-                                    frango assado no forno, bata cozinha, castanha assada, choriço, azeitonas,
-                                    cogumelos, pão, os nossos molhos especiais da casa e fatia dourada.</p>
-                                <div class="details">
-                                    <span class="price-tag"><small>€</small>109,99</span>
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="reviews-text mb-0 me-3">4,5/5</h6>
-                                        <div class="reviews-stars">
-                                            <i class="bi-star-fill reviews-icon"></i>
-                                            <i class="bi-star-fill reviews-icon"></i>
-                                            <i class="bi-star-fill reviews-icon"></i>
-                                            <i class="bi-star-fill reviews-icon"></i>
-                                            <i class="bi-star reviews-icon"></i>
-                                        </div>
-                                        <p class="reviews-text mb-0 ms-4">128 Avaliações</p>
+                                        <p class="reviews-text mb-0 ms-4">18 Avaliações</p>
                                     </div>
                                 </div>
                             </div>
